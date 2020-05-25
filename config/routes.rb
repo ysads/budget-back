@@ -1,3 +1,12 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  devise_for :users,
+             path: 'api',
+             controllers: { sessions: 'api/sessions' },
+             defaults: { format: :json }
+
+  namespace :api, constraints: { format: :json } do
+    get 'me', to: 'me#show'
+  end
 end

@@ -1,0 +1,75 @@
+AllCops:
+  TargetRubyVersion: 2.7.1
+  Exclude:
+    - db/**/*
+    - vendor/**/*
+    - log/**/*
+    - bin/*
+    - lib/scripts/temporary/**/*
+    - config/routes/**/*
+    - config/application.rb
+    - config/initializers/*
+    - config/environments/*
+    - node_modules/**/*
+
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - "spec/**/*"
+
+Lint/RaiseException:
+  Enabled: true
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
+
+Metrics/BlockLength:
+  ExcludedMethods:
+    - 'config'
+    - 'configure'
+    - 'context'
+    - 'describe'
+    - 'included'
+    - 'it'
+    - 'setup'
+    - 'shared_context'
+    - 'shared_examples_for'
+    - 'register'
+  Exclude:
+    - 'spec/factories/**/*'
+    - 'config/routes.rb'
+
+Style/Documentation:
+  Enabled: false
+
+Style/ExponentialNotation:
+  Enabled: true
+  EnforcedStyle: scientific
+
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - Gemfile
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
+
+Style/Lambda:
+  EnforcedStyle: literal
+
+Style/MutableConstant:
+  Enabled: false
+
+Style/SlicingWithRange:
+  Enabled: true
+
