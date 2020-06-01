@@ -1,6 +1,7 @@
 AllCops:
   TargetRubyVersion: 2.7.1
   Exclude:
+    - Gemfile
     - db/**/*
     - vendor/**/*
     - log/**/*
@@ -18,6 +19,9 @@ Layout/EmptyLinesAroundAttributeAccessor:
 Lint/AmbiguousBlockAssociation:
   Exclude:
     - "spec/**/*"
+
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
 
 Lint/RaiseException:
   Enabled: true

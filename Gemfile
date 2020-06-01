@@ -6,6 +6,7 @@ ruby '>= 2.7.1'
 gem 'devise'
 gem 'fast_jsonapi', '~> 1.7.2', git: 'https://github.com/fast-jsonapi/fast_jsonapi'
 gem 'oj', '>= 3.0'
+gem 'overcommit'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '>= 4.1'
 gem 'rack-cors'
@@ -28,5 +29,3 @@ group :development do
   # gem 'spring'
   # gem 'spring-watcher-listen', '~> 2.0.0'
 end
-
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
