@@ -66,9 +66,9 @@ class CreateInitialTables < ActiveRecord::Migration[6.0]
     end
 
     create_table :accounts, id: :uuid do |t|
+      t.string :type
       t.string :name, null: false
       t.datetime :closed_at
-      t.string :type, null: false
       t.integer :cleared_balance, null: false, default: 0
       t.integer :uncleared_balance, null: false, default: 0
       t.timestamps
