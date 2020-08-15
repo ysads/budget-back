@@ -2,5 +2,8 @@
 
 module Account
   class Tracking < Base
+    def nature
+      :tracking
+    end
   end
 end

@@ -2,5 +2,8 @@
 
 module Account
   class Credit < Base
+    def nature
+      :budget
+    end
   end
 end

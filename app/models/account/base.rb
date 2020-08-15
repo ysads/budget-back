@@ -7,5 +7,9 @@ module Account
     belongs_to :budget_board
 
     validates :name, :cleared_balance, :uncleared_balance, presence: true
+
+    def balance
+      cleared_balance + uncleared_balance
+    end
   end
 end

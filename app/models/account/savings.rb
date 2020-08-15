@@ -2,5 +2,8 @@
 
 module Account
   class Savings < Base
+    def nature
+      :tracking
+    end
   end
 end
