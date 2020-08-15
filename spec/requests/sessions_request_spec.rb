@@ -18,9 +18,10 @@ describe Api::SessionsController do
           }
         }
 
-        post '/api/sign_in', headers: headers, params: payload
+        post '/api/sign_in', params: payload
 
         expect(response).to have_http_status(:ok)
+        expect(response.headers['Set-Cookie']).to be_present
       end
     end
 

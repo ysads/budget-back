@@ -14,6 +14,12 @@ module Api
       render json: Api::BudgetBoardSerializer.new(available_budgets)
     end
 
+    def show
+      budget_board = available_budgets.find(params[:id])
+
+      render json: Api::BudgetBoardSerializer.new(budget_board)
+    end
+
     private
 
     def available_budgets
