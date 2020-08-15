@@ -11,11 +11,7 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '>= 4.1'
 gem 'rack-cors'
 gem 'rails', '>= 6.0.3', '>= 6.0.3.1'
-gem 'rubocop', '>= 0.84'
-
-# Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
-
+gem 'rubocop', '>= 0.89'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
@@ -26,6 +22,4 @@ end
 
 group :development do
   gem 'listen', '~> 3.2'
-  # gem 'spring'
-  # gem 'spring-watcher-listen', '~> 2.0.0'
 end
