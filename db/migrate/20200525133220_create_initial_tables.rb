@@ -71,6 +71,7 @@ class CreateInitialTables < ActiveRecord::Migration[6.0]
       t.datetime :closed_at
       t.integer :cleared_balance, null: false, default: 0
       t.integer :uncleared_balance, null: false, default: 0
+      t.uuid :budget_board_id, null: false
       t.timestamps
     end
   end

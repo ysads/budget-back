@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2020_05_25_133220) do
     t.datetime "closed_at"
     t.integer "cleared_balance", default: 0, null: false
     t.integer "uncleared_balance", default: 0, null: false
+    t.uuid "budget_board_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
