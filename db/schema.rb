@@ -17,11 +17,12 @@ ActiveRecord::Schema.define(version: 2020_05_25_133220) do
   enable_extension "plpgsql"
 
   create_table "accounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "type"
     t.string "name", null: false
     t.datetime "closed_at"
-    t.string "type", null: false
     t.integer "cleared_balance", default: 0, null: false
     t.integer "uncleared_balance", default: 0, null: false
+    t.uuid "budget_board_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

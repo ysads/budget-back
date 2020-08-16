@@ -1,6 +1,6 @@
 AllCops:
-  TargetRubyVersion: 2.7.1
   Exclude:
+    - Gemfile
     - db/**/*
     - vendor/**/*
     - log/**/*
@@ -11,13 +11,21 @@ AllCops:
     - config/initializers/*
     - config/environments/*
     - node_modules/**/*
+  NewCops: enable
+  TargetRubyVersion: 2.7.1
 
 Layout/EmptyLinesAroundAttributeAccessor:
   Enabled: true
 
+Layout/LineLength:
+  Max: 80
+
 Lint/AmbiguousBlockAssociation:
   Exclude:
     - "spec/**/*"
+
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
 
 Lint/RaiseException:
   Enabled: true
@@ -73,3 +81,5 @@ Style/MutableConstant:
 Style/SlicingWithRange:
   Enabled: true
 
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
