@@ -17,19 +17,19 @@ describe Api::AccountsController do
       end
     end
 
-    it 'returns all budget boards from current_user', :aggregate_failures do
-      create(:budget_board)
-      budget_board = create(:budget_board, user: user)
+    it 'returns accounts from any type', :aggregate_failures do
+      tracking_account = create(:tracking_account)
+      checking_account = create(:checking_account)
 
-      allow(Api::BudgetBoardSerializer).to receive(:new)
+      allow(Api::AccountSerializer).to receive(:new)
 
       sign_in(user)
 
       get '/api/accounts', headers: headers
 
       expect(response).to have_http_status(:ok)
-      expect(Api::BudgetBoardSerializer).to(
-        have_received(:new).with([budget_board])
+      expect(Api::AccountSerializer).to(
+        have_received(:new).with([tracking_account, checking_account])
       )
     end
   end

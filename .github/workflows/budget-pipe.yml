@@ -30,6 +30,7 @@ jobs:
         run: bundle exec rspec --format progress
     env:
       RAILS_ENV: test
+      PGHOST: localhost
       BUDGET_DB_USERNAME: test
       BUDGET_DB_PASSWORD: test
   rubocop:
