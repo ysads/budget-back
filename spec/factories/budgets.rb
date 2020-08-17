@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :budget_board do
+  factory :budget do
     name { 'My Budget' }
     currency { 'BRL' }
     user

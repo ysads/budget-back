@@ -2,16 +2,16 @@
 
 require 'rails_helper'
 
-describe Api::BudgetBoardsController do
+describe Api::BudgetsController do
   let(:user) { create(:user) }
   let(:headers) do
     { 'Accept': 'application/json' }
   end
 
-  describe 'POST /api/budget_boards' do
+  describe 'POST /api/budgets' do
     context 'when there is no authorization' do
       it 'returns :unauthorized' do
-        post '/api/budget_boards', headers: headers
+        post '/api/budgets', headers: headers
 
         expect(response).to have_http_status(:unauthorized)
       end
@@ -27,45 +27,45 @@ describe Api::BudgetBoardsController do
         sign_in(user)
 
         expect do
-          post '/api/budget_boards', headers: headers, params: params
-        end.to change { BudgetBoard.count }.by(1)
+          post '/api/budgets', headers: headers, params: params
+        end.to change { Budget.count }.by(1)
 
-        expect(BudgetBoard.last).to have_attributes(params)
+        expect(Budget.last).to have_attributes(params)
         expect(response).to have_http_status(:ok)
       end
     end
   end
 
-  describe 'GET /api/budget_boards/' do
+  describe 'GET /api/budgets/' do
     context 'when there is no authorization' do
       it 'returns :unauthorized' do
-        get '/api/budget_boards', headers: headers
+        get '/api/budgets', headers: headers
 
         expect(response).to have_http_status(:unauthorized)
       end
     end
 
     it 'returns all budget boards from current_user', :aggregate_failures do
-      create(:budget_board)
-      budget_board = create(:budget_board, user: user)
+      create(:budget)
+      budget = create(:budget, user: user)
 
-      allow(Api::BudgetBoardSerializer).to receive(:new)
+      allow(Api::BudgetSerializer).to receive(:new)
 
       sign_in(user)
 
-      get '/api/budget_boards', headers: headers
+      get '/api/budgets', headers: headers
 
       expect(response).to have_http_status(:ok)
-      expect(Api::BudgetBoardSerializer).to(
-        have_received(:new).with([budget_board])
+      expect(Api::BudgetSerializer).to(
+        have_received(:new).with([budget])
       )
     end
   end
 
-  describe 'GET /api/budget_boards/:id' do
+  describe 'GET /api/budgets/:id' do
     context 'when there is no authorization' do
       it 'returns :unauthorized' do
-        get '/api/budget_boards', headers: headers
+        get '/api/budgets', headers: headers
 
         expect(response).to have_http_status(:unauthorized)
       end
@@ -74,31 +74,31 @@ describe Api::BudgetBoardsController do
     context "when budget board doesn't belong to current user",
             :aggregate_failures do
       it 'returns :not_found' do
-        budget_board = create(:budget_board, user: create(:user))
+        budget = create(:budget, user: create(:user))
 
-        allow(Api::BudgetBoardSerializer).to receive(:new)
+        allow(Api::BudgetSerializer).to receive(:new)
 
         sign_in(user)
 
-        get "/api/budget_boards/#{budget_board.id}", headers: headers
+        get "/api/budgets/#{budget.id}", headers: headers
 
         expect(response).to have_http_status(:not_found)
-        expect(Api::BudgetBoardSerializer).not_to have_received(:new)
+        expect(Api::BudgetSerializer).not_to have_received(:new)
       end
     end
 
     it 'returns the budget board with the specified id', :aggregate_failures do
-      budget_board = create(:budget_board, user: user)
+      budget = create(:budget, user: user)
 
-      allow(Api::BudgetBoardSerializer).to receive(:new)
+      allow(Api::BudgetSerializer).to receive(:new)
 
       sign_in(user)
 
-      get "/api/budget_boards/#{budget_board.id}", headers: headers
+      get "/api/budgets/#{budget.id}", headers: headers
 
       expect(response).to have_http_status(:ok)
-      expect(Api::BudgetBoardSerializer).to(
-        have_received(:new).with(budget_board)
+      expect(Api::BudgetSerializer).to(
+        have_received(:new).with(budget)
       )
     end
   end

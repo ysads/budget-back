@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Budget < ApplicationRecord
-  belongs_to :category
-  has_many :months, through: :monthly_budgets
+  has_many :category_groups
+  belongs_to :user
 
-  validates :amount, :reference_at, :outflow, presence: true
+  validates :currency, :name, presence: true
 end

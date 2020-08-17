@@ -4,7 +4,7 @@ module Account
   class Base < ApplicationRecord
     self.table_name = 'accounts'
 
-    belongs_to :budget_board
+    belongs_to :budget
 
     validates :name, :cleared_balance, :uncleared_balance, presence: true
 
