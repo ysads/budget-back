@@ -3,5 +3,5 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :recoverable, :validatable
 
-  has_many :budget_boards
+  has_many :budgets
 end

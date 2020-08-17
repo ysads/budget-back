@@ -2,7 +2,7 @@
 
 class CategoryGroup < ApplicationRecord
   has_many :categories
-  belongs_to :budget_board
+  belongs_to :budget
 
   validates :name, presence: true
 end

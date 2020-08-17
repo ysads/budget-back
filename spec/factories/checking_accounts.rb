@@ -6,6 +6,6 @@ FactoryBot.define do
     cleared_balance { rand(1..1_000_000) }
     uncleared_balance { rand(1..1_000_000) }
     closed_at { nil }
-    budget_board
+    budget
   end
 end

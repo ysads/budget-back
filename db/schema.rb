@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_25_133220) do
+ActiveRecord::Schema.define(version: 2020_08_17_114638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -22,12 +22,12 @@ ActiveRecord::Schema.define(version: 2020_05_25_133220) do
     t.datetime "closed_at"
     t.integer "cleared_balance", default: 0, null: false
     t.integer "uncleared_balance", default: 0, null: false
-    t.uuid "budget_board_id", null: false
+    t.uuid "budget_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "budget_boards", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "budgets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "currency", default: "USD", null: false
     t.uuid "user_id", null: false
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2020_05_25_133220) do
 
   create_table "category_groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
-    t.uuid "budget_board_id", null: false
+    t.uuid "budget_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
