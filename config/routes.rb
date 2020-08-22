@@ -9,8 +9,10 @@ Rails.application.routes.draw do
   namespace :api, constraints: { format: :json } do
     get 'me', to: 'me#show'
 
-    resources :accounts, only: %i[create index show]
-    resources :budgets, only: %i[create index show]
+    resources :budgets, only: %i[create index show] do
+      resources :accounts, only: %i[create index show]
+    end
+
     resources :users, only: %i[create]
   end
 end
