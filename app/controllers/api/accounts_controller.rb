@@ -3,20 +3,23 @@
 module Api
   class AccountsController < ApplicationController
     before_action :authenticate_user!
+    before_action :authorize_budget!
 
     def index
-      accounts = Account::Base.where(account_params)
-
-      render json: Api::AccountSerializer.new(accounts)
+      render json: Api::AccountSerializer.new(available_accounts)
     end
 
     def show
-      account = Account::Base.find(params[:id])
+      account = available_accounts.find(params[:id])
 
       render json: Api::AccountSerializer.new(account)
     end
 
     private
+
+    def available_accounts
+      current_user.budgets.find(params[:budget_id]).accounts
+    end
 
     def account_params
       params.permit(:budget_board_id)
