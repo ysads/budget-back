@@ -31,7 +31,7 @@ describe Api::AccountsController do
 
     it 'returns accounts from any type at given budget', :aggregate_failures do
       create(:checking_account, budget: create(:budget))
-      tracking_account = create(:tracking_account, budget: budget)
+      asset_account = create(:asset_account, budget: budget)
       checking_account = create(:checking_account, budget: budget)
 
       allow(Api::AccountSerializer).to receive(:new)
@@ -42,7 +42,7 @@ describe Api::AccountsController do
 
       expect(response).to have_http_status(:ok)
       expect(Api::AccountSerializer).to have_received(:new).with(
-        [tracking_account, checking_account]
+        [asset_account, checking_account]
       )
     end
   end

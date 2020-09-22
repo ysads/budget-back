@@ -5,7 +5,7 @@ require 'rails_helper'
 describe Api::AccountSerializer do
   it 'serializes using json api' do
     account = create(:random_account)
-    account_type = account.type.sub('::', '_').underscore
+    account_type = account.type.split('::').last.downcase
 
     result = described_class.new(account).serializable_hash
 
