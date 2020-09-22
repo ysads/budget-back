@@ -27,6 +27,9 @@ Lint/AmbiguousBlockAssociation:
 Lint/DeprecatedOpenSSLConstant:
   Enabled: true
 
+Lint/MissingSuper:
+  Enabled: false
+
 Lint/RaiseException:
   Enabled: true
 
@@ -81,5 +84,11 @@ Style/MutableConstant:
 Style/SlicingWithRange:
   Enabled: true
 
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+
 Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: comma
