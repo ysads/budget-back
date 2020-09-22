@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_21_145836) do
+ActiveRecord::Schema.define(version: 2020_09_22_152443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -59,15 +59,13 @@ ActiveRecord::Schema.define(version: 2020_09_21_145836) do
   end
 
   create_table "months", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.datetime "month", null: false
-    t.datetime "start_at", null: false
-    t.datetime "finish_at", null: false
     t.integer "income", default: 0, null: false
     t.integer "activity", default: 0, null: false
     t.integer "budgeted", default: 0, null: false
     t.integer "to_be_budgeted", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "iso_month", null: false
   end
 
   create_table "payees", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -84,7 +82,7 @@ ActiveRecord::Schema.define(version: 2020_09_21_145836) do
     t.datetime "cleared_at"
     t.integer "amount", null: false
     t.uuid "payee_id", null: false
-    t.uuid "monthly_budget_id", null: false
+    t.uuid "monthly_budget_id"
     t.uuid "origin_id", null: false
     t.uuid "destination_id"
     t.datetime "created_at", precision: 6, null: false
