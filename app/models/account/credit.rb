@@ -2,6 +2,10 @@
 
 module Account
   class Credit < Base
+    def debt?
+      true
+    end
+
     def nature
       :budget
     end

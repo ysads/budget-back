@@ -2,6 +2,10 @@
 
 module Account
   class Asset < Base
+    def debt?
+      false
+    end
+
     def nature
       :tracking
     end

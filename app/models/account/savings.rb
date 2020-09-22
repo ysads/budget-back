@@ -2,6 +2,10 @@
 
 module Account
   class Savings < Base
+    def debt?
+      false
+    end
+
     def nature
       :tracking
     end
