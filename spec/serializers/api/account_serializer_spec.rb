@@ -20,9 +20,9 @@ describe Api::AccountSerializer do
           name: account.name,
           nature: account.nature,
           uncleared_balance: account.uncleared_balance,
-          type: account_type
-        }
-      }
+          type: account_type,
+        },
+      },
     )
   end
 end

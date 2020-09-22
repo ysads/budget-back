@@ -12,7 +12,7 @@ describe Api::UsersController do
       params = {
         name: 'Dummy User',
         email: 'dummy@mail.com',
-        password: '123456'
+        password: '123456',
       }
 
       expect do
@@ -21,7 +21,7 @@ describe Api::UsersController do
 
       expect(User.last).to have_attributes(
         name: 'Dummy User',
-        email: 'dummy@mail.com'
+        email: 'dummy@mail.com',
       )
       expect(response).to have_http_status(:ok)
     end

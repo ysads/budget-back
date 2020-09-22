@@ -32,7 +32,7 @@ describe AccountType do
       type = described_class.all.sample
 
       expect(described_class.class_of(type)).to eq(
-        "Account::#{type.camelize}".constantize
+        "Account::#{type.camelize}".constantize,
       )
     end
   end

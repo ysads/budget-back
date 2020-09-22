@@ -21,7 +21,7 @@ describe Api::BudgetsController do
         params = {
           name: 'Dummy Budget',
           currency: 'BRL',
-          user_id: user.id
+          user_id: user.id,
         }
 
         sign_in(user)
@@ -57,7 +57,7 @@ describe Api::BudgetsController do
 
       expect(response).to have_http_status(:ok)
       expect(Api::BudgetSerializer).to(
-        have_received(:new).with([budget])
+        have_received(:new).with([budget]),
       )
     end
   end
@@ -98,7 +98,7 @@ describe Api::BudgetsController do
 
       expect(response).to have_http_status(:ok)
       expect(Api::BudgetSerializer).to(
-        have_received(:new).with(budget)
+        have_received(:new).with(budget),
       )
     end
   end

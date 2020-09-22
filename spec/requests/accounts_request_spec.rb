@@ -42,7 +42,7 @@ describe Api::AccountsController do
 
       expect(response).to have_http_status(:ok)
       expect(Api::AccountSerializer).to have_received(:new).with(
-        [asset_account, checking_account]
+        [asset_account, checking_account],
       )
     end
   end
@@ -94,7 +94,7 @@ describe Api::AccountsController do
 
       expect(response).to have_http_status(:ok)
       expect(Api::AccountSerializer).to(
-        have_received(:new).with(account)
+        have_received(:new).with(account),
       )
     end
   end

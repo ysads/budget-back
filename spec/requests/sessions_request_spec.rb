@@ -14,8 +14,8 @@ describe Api::SessionsController do
         payload = {
           user: {
             email: user.email,
-            password: user.password
-          }
+            password: user.password,
+          },
         }
 
         post '/api/sign_in', params: payload
@@ -31,8 +31,8 @@ describe Api::SessionsController do
         payload = {
           user: {
             email: user.email,
-            password: 'wrong_password'
-          }
+            password: 'wrong_password',
+          },
         }
 
         post '/api/sign_in', headers: headers, params: payload
