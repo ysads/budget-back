@@ -20,6 +20,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rubocop'
   gem 'shoulda-matchers'
+  gem 'timecop'
 end
 
 group :development do
