@@ -8,6 +8,10 @@ module Account
 
     validates :name, :cleared_balance, :uncleared_balance, presence: true
 
+    def budget?
+      nature.eql?(:budget)
+    end
+
     def balance
       cleared_balance + uncleared_balance
     end

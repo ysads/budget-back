@@ -15,14 +15,22 @@ module Api
       render json: Api::AccountSerializer.new(account)
     end
 
+    def create
+      account = Accounts::CreateWithStartingBalance.call(create_params)
+
+      render json: Api::AccountSerializer.new(account)
+    end
+
     private
 
     def available_accounts
       current_user.budgets.find(params[:budget_id]).accounts
     end
 
-    def account_params
-      params.permit(:budget_board_id)
+    def create_params
+      params.permit(
+        :account_name, :account_type, :budget_id, :current_balance, :payee_name
+      )
     end
   end
 end

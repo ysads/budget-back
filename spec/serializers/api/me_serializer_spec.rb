@@ -14,9 +14,9 @@ describe Api::MeSerializer do
         type: :me,
         attributes: {
           email: user.email,
-          name: user.name
-        }
-      }
+          name: user.name,
+        },
+      },
     )
   end
 end

@@ -2,7 +2,12 @@
 
 class Transaction < ApplicationRecord
   belongs_to :payee
-  belongs_to :monthly_budget
+  belongs_to :origin, class_name: 'Account::Base'
+  belongs_to :monthly_budget, optional: true
 
-  validates :amount, :reference_at, :outflow, presence: true
+  validates :amount, :reference_at, presence: true
+
+  def cleared?
+    cleared_at.present?
+  end
 end

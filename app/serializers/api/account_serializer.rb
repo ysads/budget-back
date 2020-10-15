@@ -10,7 +10,7 @@ module Api
                :uncleared_balance
 
     attribute :type do |obj|
-      obj.type.sub('::', '_').underscore
+      obj.type.split('::').last.downcase
     end
   end
 end
