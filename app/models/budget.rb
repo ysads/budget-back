@@ -6,5 +6,5 @@ class Budget < ApplicationRecord
   has_many :payees
   belongs_to :user
 
-  validates :currency, :name, presence: true
+  validates :currency, :name, :date_format, presence: true
 end

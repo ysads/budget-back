@@ -14,6 +14,7 @@ describe Api::BudgetSerializer do
         type: :budget,
         attributes: {
           currency: budget.currency,
+          date_format: budget.date_format,
           name: budget.name,
         },
       },

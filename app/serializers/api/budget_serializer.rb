@@ -2,6 +2,6 @@
 
 module Api
   class BudgetSerializer < ApplicationSerializer
-    attributes :currency, :name
+    attributes :currency, :date_format, :name
   end
 end

@@ -2,8 +2,9 @@
 
 FactoryBot.define do
   factory :budget do
-    name { 'My Budget' }
     currency { 'BRL' }
+    date_format { 'dd-MM-YYYY' }
+    name { 'My Budget' }
     user
   end
 end
