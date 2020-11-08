@@ -7,6 +7,7 @@ describe Budget do
     it { is_expected.to belong_to(:user) }
     it { is_expected.to have_many(:category_groups) }
     it { is_expected.to have_many(:accounts).class_name('Account::Base') }
+    it { is_expected.to have_many(:payees) }
   end
 
   describe 'validations' do
