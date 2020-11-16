@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
     resources :budgets, only: %i[create index show] do
       resources :accounts, only: %i[create index show]
+      resources :categories, only: %i[index]
       resources :category_groups, only: %i[index]
       resources :payees, only: %i[index]
       resources :transactions, only: %i[index]
