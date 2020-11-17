@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_08_020214) do
+ActiveRecord::Schema.define(version: 2020_11_17_130622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 2020_11_08_020214) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "iso_month", null: false
+    t.uuid "budget_id"
   end
 
   create_table "payees", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -100,5 +101,6 @@ ActiveRecord::Schema.define(version: 2020_11_08_020214) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "months", "budgets"
   add_foreign_key "payees", "budgets"
 end

@@ -8,7 +8,9 @@ describe Months::AddIncome do
   let(:amount) { rand(10_000) }
 
   it 'increases income and to_be_budgeted with amount' do
-    month = create(:month, iso_month: Time.current.strftime('%Y-%m'))
+    month = create(
+      :month, budget_id: budget_id, iso_month: Time.current.strftime('%Y-%m')
+    )
     prev_income = month.income
     prev_to_be_budgeted = month.to_be_budgeted
 
@@ -35,9 +37,10 @@ describe Months::AddIncome do
       end.to change { Month.count }.by(1)
 
       expect(Month.last).to have_attributes(
-        iso_month: iso_month,
         activity: 0,
+        budget_id: budget_id,
         budgeted: 0,
+        iso_month: iso_month,
         income: amount,
         to_be_budgeted: amount,
       )
