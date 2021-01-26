@@ -27,7 +27,7 @@ module Api
     end
 
     def permitted_params
-      params.permit(:name, :currency, :user_id)
+      params.permit(:currency, :date_format, :name, :user_id)
     end
   end
 end

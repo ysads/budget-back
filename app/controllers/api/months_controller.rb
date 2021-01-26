@@ -5,6 +5,7 @@ module Api
     before_action :authenticate_user!
     before_action :authorize_budget!
 
+    # GET /api/budgets/:budget_id/months
     def show
       month = ::Months::FetchOrCreate.call(permitted_params)
 

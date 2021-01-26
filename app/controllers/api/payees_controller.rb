@@ -3,6 +3,7 @@
 module Api
   class PayeesController < ApplicationController
     before_action :authenticate_user!
+    before_action :authorize_budget!
 
     def index
       render json: PayeeSerializer.new(available_payees)

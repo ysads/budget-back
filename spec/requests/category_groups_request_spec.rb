@@ -33,7 +33,7 @@ describe Api::CategoryGroupsController do
       end
     end
 
-    it 'returns the all category groups within given budget', :aggregate_failures do
+    it 'returns category groups within given budget', :aggregate_failures do
       category_group = create(:category_group, budget: budget)
 
       allow(Api::CategoryGroupSerializer).to receive(:new)
