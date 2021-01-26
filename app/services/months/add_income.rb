@@ -20,7 +20,10 @@ module Months
     attr_accessor :amount, :budget_id, :iso_month
 
     def find_or_create_month
-      @month = Month.find_or_create_by!(iso_month: iso_month)
+      @month = Month.find_or_create_by!(
+        budget_id: budget_id,
+        iso_month: iso_month,
+      )
     end
 
     def update_income

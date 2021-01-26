@@ -4,6 +4,7 @@ require 'rails_helper'
 
 describe Month do
   describe 'relationships' do
+    it { is_expected.to belong_to(:budget) }
     it { is_expected.to have_many(:monthly_budgets) }
   end
 

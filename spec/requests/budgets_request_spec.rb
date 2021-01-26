@@ -22,6 +22,7 @@ describe Api::BudgetsController do
           name: 'Dummy Budget',
           currency: 'BRL',
           user_id: user.id,
+          date_format: 'dd.MM.YYYY',
         }
 
         sign_in(user)
