@@ -4,6 +4,7 @@ class ApplicationController < ActionController::API
   include ActionController::MimeResponds
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
+  rescue_from ApplicationError, with: :render_error
 
   respond_to :json
 
@@ -19,6 +20,10 @@ class ApplicationController < ActionController::API
 
   def available_budgets
     current_user.budgets
+  end
+
+  def render_error(error)
+    render json: error.to_h, status: :bad_request
   end
 
   def not_found
