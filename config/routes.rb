@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       resources :categories, only: %i[create index]
       resources :category_groups, only: %i[create index]
       resources :months, only: %i[show], param: :iso_month
-      resources :monthly_budgets, only: %i[create]
+      resources :monthly_budgets, only: %i[create index update]
       resources :payees, only: %i[index]
       resources :transactions, only: %i[index]
     end
