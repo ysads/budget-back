@@ -14,6 +14,7 @@ gem 'rails'
 gem 'bootsnap'
 
 group :development, :test do
+  gem 'amazing_print'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_bot_rails'
   gem 'faker'
