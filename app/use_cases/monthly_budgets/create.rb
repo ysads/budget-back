@@ -9,7 +9,17 @@ module MonthlyBudgets
     def call
       raise MonthlyBudgets::AlreadyExists if already_exists?
 
-      ::MonthlyBudget.create!(
+      create_monthly_budget
+      update_month
+      monthly_budget
+    end
+
+    private
+
+    attr_accessor :monthly_budget
+
+    def create_monthly_budget
+      @monthly_budget = ::MonthlyBudget.create!(
         activity: 0,
         budgeted: params[:budgeted],
         category_id: params[:category_id],
@@ -17,13 +27,21 @@ module MonthlyBudgets
       )
     end
 
-    private
+    def update_month
+      month.update!(
+        budgeted: month.budgeted + monthly_budget.budgeted,
+      )
+    end
 
     def already_exists?
       MonthlyBudget.exists?(
         category_id: params[:category_id],
         month_id: params[:month_id],
       )
+    end
+
+    def month
+      @month ||= monthly_budget.month
     end
   end
 end

@@ -14,8 +14,10 @@ describe Api::MonthlyBudgetSerializer do
         type: :monthly_budget,
         attributes: {
           activity: monthly_budget.activity,
+          available: monthly_budget.available,
           budgeted: monthly_budget.budgeted,
           category_id: monthly_budget.category_id,
+          category_group_id: monthly_budget.category.category_group_id,
           month_id: monthly_budget.month_id,
         },
       },
