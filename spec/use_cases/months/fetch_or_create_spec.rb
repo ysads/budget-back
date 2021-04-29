@@ -6,7 +6,7 @@ describe Months::FetchOrCreate do
   let(:params) do
     {
       budget_id: create(:budget).id,
-      iso_month: Faker::Date.in_date_period.strftime('%Y-%m'),
+      iso_month: IsoMonth.of(Faker::Date.in_date_period),
     }
   end
 

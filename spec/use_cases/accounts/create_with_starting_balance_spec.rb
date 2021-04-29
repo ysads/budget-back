@@ -65,7 +65,7 @@ describe Accounts::CreateWithStartingBalance do
     end
 
     it 'does not update month income or to_be_budgeted' do
-      month = create(:month, iso_month: Date.current.strftime('%Y-%m'))
+      month = create(:month, iso_month: IsoMonth.of(Date.current))
       prev_income = month.income
       prev_to_be_budgeted = month.to_be_budgeted
       type = %w[credit].sample
