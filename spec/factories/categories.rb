@@ -12,7 +12,7 @@ FactoryBot.define do
 
       after(:create) do |category, evaluator|
         category.category_group.update!(
-          budget: evaluator.budget
+          budget: evaluator.budget,
         )
       end
     end

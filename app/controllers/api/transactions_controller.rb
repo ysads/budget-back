@@ -19,7 +19,7 @@ module Api
     def create_params
       params.permit(
         :amount, :budget_id, :cleared_at, :category_id,
-        :memo, :origin_id, :outflow, :payee_name, :reference_at,
+        :memo, :origin_id, :outflow, :payee_name, :reference_at
       )
     end
   end
