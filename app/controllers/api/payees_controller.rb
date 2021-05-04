@@ -5,6 +5,7 @@ module Api
     before_action :authenticate_user!
     before_action :authorize_budget!
 
+    # GET /budgets/:id/payees
     def index
       render json: PayeeSerializer.new(available_payees)
     end
