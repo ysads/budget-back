@@ -28,4 +28,18 @@ describe Accounts::Create do
       end.to raise_error { Accounts::InvalidTypeError.new }
     end
   end
+
+  context 'when there is an account with same type and name' do
+    it 'raises DuplicateError' do
+      create(:random_account,
+             :with_type,
+             type: type,
+             budget_id: budget.id,
+             name: name)
+
+      expect do
+        described_class.call(budget_id: budget.id, name: name, type: type)
+      end.to raise_error { Accounts::DuplicateError.new }
+    end
+  end
 end

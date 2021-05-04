@@ -12,24 +12,25 @@ module Months
       ActiveRecord::Base.transaction do
         find_or_create_month
         update_income
+        month
       end
     end
 
     private
 
-    attr_accessor :amount, :budget_id, :iso_month
+    attr_accessor :month
 
     def find_or_create_month
       @month = Month.find_or_create_by!(
-        budget_id: budget_id,
-        iso_month: iso_month,
+        budget_id: @budget_id,
+        iso_month: @iso_month,
       )
     end
 
     def update_income
       @month.update(
-        income: @month.income + amount,
-        to_be_budgeted: @month.to_be_budgeted + amount,
+        income: month.income + @amount,
+        to_be_budgeted: month.to_be_budgeted + @amount,
       )
     end
   end

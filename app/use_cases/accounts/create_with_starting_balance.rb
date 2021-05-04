@@ -65,7 +65,7 @@ module Accounts
       Months::AddIncome.call(
         amount: initial_balance,
         budget_id: params[:budget_id],
-        iso_month: Date.current.strftime('%Y-%m'),
+        iso_month: IsoMonth.of(Date.current),
       )
     end
   end

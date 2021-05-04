@@ -4,12 +4,12 @@ require 'rails_helper'
 
 describe Months::AddIncome do
   let(:budget_id) { create(:budget).id }
-  let(:iso_month) { Time.current.strftime('%Y-%m') }
+  let(:iso_month) { IsoMonth.of(Time.current) }
   let(:amount) { rand(10_000) }
 
   it 'increases income and to_be_budgeted with amount' do
     month = create(
-      :month, budget_id: budget_id, iso_month: Time.current.strftime('%Y-%m')
+      :month, budget_id: budget_id, iso_month: IsoMonth.of(Time.current)
     )
     prev_income = month.income
     prev_to_be_budgeted = month.to_be_budgeted
@@ -24,6 +24,20 @@ describe Months::AddIncome do
       income: prev_income + amount,
       to_be_budgeted: prev_to_be_budgeted + amount,
     )
+  end
+
+  it 'returns the updated record' do
+    month = create(
+      :month, budget_id: budget_id, iso_month: IsoMonth.of(Time.current)
+    )
+
+    response = described_class.call(
+      amount: amount,
+      budget_id: budget_id,
+      iso_month: iso_month,
+    )
+
+    expect(response).to eq(month.reload)
   end
 
   context 'when month does not exist' do

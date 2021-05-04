@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :month do
     iso_month do
-      Faker::Date.between(from: 2.years.ago, to: Date.today).strftime('%Y-%m')
+      IsoMonth.of(Faker::Date.between(from: 2.years.ago, to: Date.today))
     end
     activity { rand(100_000) }
     budgeted { rand(100_000) }
