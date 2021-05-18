@@ -14,6 +14,12 @@ module Api
       )
     end
 
+    def index
+      transactions = TransactionsQuery.execute(index_params)
+
+      render json: Api::TransactionSerializer.new(transactions)
+    end
+
     private
 
     def create_params
@@ -21,6 +27,10 @@ module Api
         :amount, :budget_id, :cleared_at, :category_id,
         :memo, :origin_id, :outflow, :payee_name, :reference_at
       )
+    end
+
+    def index_params
+      params.permit(:origin_id)
     end
   end
 end
