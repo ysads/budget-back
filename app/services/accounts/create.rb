@@ -10,6 +10,7 @@ module Accounts
 
     def call
       raise InvalidTypeError unless account_class.present?
+      raise DuplicateError if duplicate_account?
 
       create_account
     end
@@ -17,6 +18,10 @@ module Accounts
     private
 
     attr_accessor :name, :budget_id, :type
+
+    def duplicate_account?
+      account_class.exists?(name: @name)
+    end
 
     def account_class
       AccountType.class_of(@type)
