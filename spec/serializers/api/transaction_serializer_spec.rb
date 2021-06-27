@@ -59,9 +59,9 @@ describe Api::TransactionSerializer do
           id: transaction.id,
           type: :transaction,
           attributes: hash_including(
-            category_id: nil
-          )
-        )
+            category_id: nil,
+          ),
+        ),
       )
     end
   end

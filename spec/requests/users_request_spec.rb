@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Api::UsersController do
   let(:headers) do
-    { 'Accept': 'application/json' }
+    { Accept: 'application/json' }
   end
 
   describe 'POST /api/users' do

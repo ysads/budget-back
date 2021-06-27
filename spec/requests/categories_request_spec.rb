@@ -5,7 +5,7 @@ require 'rails_helper'
 describe Api::CategoryGroupsController do
   let(:budget) { create(:budget) }
   let(:headers) do
-    { 'Accept': 'application/json' }
+    { Accept: 'application/json' }
   end
 
   describe 'POST /api/budgets/:id/categories' do

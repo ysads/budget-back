@@ -5,7 +5,7 @@ require 'rails_helper'
 describe Api::BudgetsController do
   let(:user) { create(:user) }
   let(:headers) do
-    { 'Accept': 'application/json' }
+    { Accept: 'application/json' }
   end
 
   describe 'POST /api/budgets' do
