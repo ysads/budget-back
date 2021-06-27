@@ -5,7 +5,7 @@ require 'rails_helper'
 describe Api::PayeesController do
   let(:budget) { create(:budget) }
   let(:headers) do
-    { 'Accept': 'application/json' }
+    { Accept: 'application/json' }
   end
 
   describe 'GET /api/budgets/:id/payees/' do

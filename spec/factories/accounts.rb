@@ -32,7 +32,7 @@ FactoryBot.define do
       after(:create) do |account, evaluator|
         if evaluator.type.present?
           account.update!(
-            type: "Account::#{evaluator.type.classify}".constantize,
+            type: "Account::#{evaluator.type.camelize}",
           )
         end
       end

@@ -14,17 +14,22 @@ describe Api::TransactionSerializer do
         type: :transaction,
         attributes: {
           amount: transaction.amount,
+          category_id: transaction.monthly_budget.category_id,
           cleared_at: transaction.cleared_at,
           destination_id: transaction.destination_id,
           memo: transaction.memo,
           monthly_budget_id: transaction.monthly_budget_id,
           origin_id: transaction.origin_id,
           payee_id: transaction.payee_id,
+          payee_name: transaction.payee.name,
           reference_at: transaction.reference_at,
         },
         relationships: {
           monthly_budget: {
-            data: nil,
+            data: {
+              id: transaction.monthly_budget_id,
+              type: :monthly_budget,
+            },
           },
           origin: {
             data: {
@@ -41,5 +46,23 @@ describe Api::TransactionSerializer do
         },
       },
     )
+  end
+
+  context 'when the transaction has no associated monthly budget' do
+    it 'features a nil category_id' do
+      transaction = create(:transaction, monthly_budget: nil)
+
+      result = described_class.new(transaction).serializable_hash
+
+      expect(result).to include(
+        data: hash_including(
+          id: transaction.id,
+          type: :transaction,
+          attributes: hash_including(
+            category_id: nil,
+          ),
+        ),
+      )
+    end
   end
 end

@@ -35,7 +35,7 @@ describe Api::MeSerializer do
           attributes: {
             email: user.email,
             name: user.name,
-            default_budget_id: nil
+            default_budget_id: nil,
           },
         },
       )

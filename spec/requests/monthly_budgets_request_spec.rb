@@ -5,7 +5,7 @@ require 'rails_helper'
 describe Api::MonthlyBudgetsController do
   let(:budget) { create(:budget) }
   let(:headers) do
-    { 'Accept': 'application/json' }
+    { Accept: 'application/json' }
   end
   let(:params) do
     {

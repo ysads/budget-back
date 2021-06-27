@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Api::SessionsController do
   let(:headers) do
-    { 'Accept': 'application/json' }
+    { Accept: 'application/json' }
   end
 
   describe 'POST /api/sign_in' do
