@@ -7,7 +7,7 @@ module Accounts
     end
 
     def message
-      'This budget already have an account with that type and name'
+      'This budget already have an account with that name'
     end
   end
 end

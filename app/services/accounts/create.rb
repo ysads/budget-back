@@ -20,7 +20,7 @@ module Accounts
     attr_accessor :name, :budget_id, :type
 
     def duplicate_account?
-      account_class.exists?(name: @name)
+      Account::Base.exists?(name: @name)
     end
 
     def account_class
