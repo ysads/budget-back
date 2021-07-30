@@ -2,9 +2,10 @@
 
 module Accounts
   class UpdateBalance < ApplicationService
-    def initialize(account:, transaction:)
+    def initialize(account:, amount:, cleared:)
       @account = account
-      @transaction = transaction
+      @amount = amount
+      @cleared = cleared
     end
 
     def call
@@ -13,16 +14,16 @@ module Accounts
 
     private
 
-    attr_accessor :account, :transaction
+    attr_accessor :account, :amount, :cleared
 
     def update_balance
-      if transaction.cleared?
+      if cleared
         account.update(
-          cleared_balance: account.cleared_balance + transaction.amount,
+          cleared_balance: account.cleared_balance + amount,
         )
       else
         account.update(
-          uncleared_balance: account.uncleared_balance + transaction.amount,
+          uncleared_balance: account.uncleared_balance + amount,
         )
       end
     end

@@ -55,7 +55,8 @@ module Accounts
     def update_account_balance
       Accounts::UpdateBalance.call(
         account: account,
-        transaction: transaction,
+        amount: transaction.amount,
+        cleared: transaction.cleared?
       )
     end
 

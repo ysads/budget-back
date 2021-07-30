@@ -24,9 +24,12 @@ describe Accounts::CreateWithStartingBalance do
 
     described_class.call(params)
 
+    transaction = Transaction.last
+
     expect(Accounts::UpdateBalance).to have_received(:call).with(
       account: Account::Base.last,
-      transaction: Transaction.last,
+      amount: transaction.amount,
+      cleared: transaction.cleared?
     )
   end
 
@@ -37,9 +40,12 @@ describe Accounts::CreateWithStartingBalance do
 
       described_class.call(params.merge(account_type: type))
 
+      transaction = Transaction.last
+
       expect(Accounts::UpdateBalance).to have_received(:call).with(
         account: Account::Base.last,
-        transaction: Transaction.last,
+        amount: transaction.amount,
+        cleared: transaction.cleared?
       )
     end
   end
