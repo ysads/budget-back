@@ -9,16 +9,16 @@ module Accounts
     def call
       ActiveRecord::Base.transaction do
         create_account
+        add_income_to_month
         create_initial_transaction
         update_account_balance
-        add_income_to_month
         account
       end
     end
 
     private
 
-    attr_accessor :account, :params, :transaction
+    attr_accessor :account, :month, :params, :transaction
 
     def initial_balance
       return params[:current_balance] unless account.debt?
@@ -47,6 +47,7 @@ module Accounts
         cleared_at: DateTime.current,
         origin: account,
         outflow: account.debt?,
+        month: month,
         payee: starting_balance_payee,
         reference_at: DateTime.current,
       )
@@ -63,7 +64,7 @@ module Accounts
     def add_income_to_month
       return if !account.budget? || account.debt?
 
-      Months::AddIncome.call(
+      @month = Months::AddIncome.call(
         amount: initial_balance,
         budget_id: params[:budget_id],
         iso_month: IsoMonth.of(Date.current),

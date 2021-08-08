@@ -8,8 +8,8 @@ module Transactions
 
     def call
       ActiveRecord::Base.transaction do
-        update_month
         create_transaction
+        update_month
         update_account_balance
 
         # INFO: Needed to fetch relationships updated in other classes
@@ -29,6 +29,7 @@ module Transactions
         outflow: params[:outflow],
         payee: payee,
         memo: params[:memo],
+        month: month,
         monthly_budget: monthly_budget,
         reference_at: params[:reference_at],
       )
