@@ -67,7 +67,7 @@ describe Transactions::Register do
 
       expect do
         described_class.call(params.merge(outflow: true))
-      end.to change { month.reload.activity }.by(params[:amount])
+      end.to change { month.reload.activity }.by(-params[:amount])
     end
   end
 
@@ -78,7 +78,7 @@ describe Transactions::Register do
       )
 
       expect do
-        described_class.call(params.merge(category_id: nil))
+        described_class.call(params.merge(category_id: nil, outflow: false))
       end.to change { month.reload.income }.by(params[:amount])
     end
   end

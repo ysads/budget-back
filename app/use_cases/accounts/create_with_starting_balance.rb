@@ -64,8 +64,15 @@ module Accounts
     def add_income_to_month
       return if !account.budget? || account.debt?
 
-      @month = Months::AddIncome.call(
+      MonthlyBudgets::UpdateAmount.call(
         amount: initial_balance,
+        amount_type: :income,
+        month: month
+      )
+    end
+
+    def month
+      @month ||= Months::FetchOrCreate.call(
         budget_id: params[:budget_id],
         iso_month: IsoMonth.of(Date.current),
       )

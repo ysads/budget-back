@@ -6,6 +6,6 @@ class MonthlyBudget < ApplicationRecord
   has_many :transactions
 
   def available
-    budgeted - activity
+    budgeted + activity
   end
 end

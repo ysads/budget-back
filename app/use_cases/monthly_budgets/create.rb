@@ -41,7 +41,7 @@ module MonthlyBudgets
     end
 
     def month
-      @month ||= monthly_budget.month
+      @month ||= Month.find(params[:month_id])
     end
   end
 end

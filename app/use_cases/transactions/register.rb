@@ -36,11 +36,14 @@ module Transactions
     end
 
     def update_month
-      if income?
-        add_income
-      else
-        add_activity
-      end
+      amount_type = income? ? :income : :activity
+
+      MonthlyBudgets::UpdateAmount.call(
+        amount: signed_amount,
+        amount_type: amount_type,
+        month: month,
+        monthly_budget: monthly_budget,
+      )
     end
 
     def update_account_balance
@@ -48,23 +51,6 @@ module Transactions
         account: origin_account,
         amount: transaction.amount,
         cleared: transaction.cleared?
-      )
-    end
-
-    def add_income
-      @month = Months::AddIncome.call(
-        amount: params[:amount],
-        budget_id: params[:budget_id],
-        iso_month: IsoMonth.of(params[:reference_at]),
-      )
-    end
-
-    def add_activity
-      @month = Months::AddActivity.call(
-        amount: params[:amount],
-        budget_id: params[:budget_id],
-        category_id: params[:category_id],
-        iso_month: IsoMonth.of(params[:reference_at]),
       )
     end
 
@@ -85,9 +71,18 @@ module Transactions
       )
     end
 
+    def month
+      @month ||= Months::FetchOrCreate.call(
+        budget_id: params[:budget_id],
+        iso_month: IsoMonth.of(params[:reference_at]),
+      )
+    end
+
     def monthly_budget
-      @monthly_budget ||= month.monthly_budgets.find_by(
-        category_id: params[:category_id],
+      return if income?
+
+      @monthly_budget ||= ::MonthlyBudgets::FetchOrCreate.call(
+        params: params.merge(month: month)
       )
     end
 

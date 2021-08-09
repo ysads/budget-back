@@ -52,12 +52,12 @@ describe Accounts::CreateWithStartingBalance do
 
   context 'when creating a tracking account' do
     it 'does not call service to add income to month' do
-      allow(Months::AddIncome).to receive(:call)
+      allow(MonthlyBudgets::UpdateAmount).to receive(:call)
       type = %w[asset savings].sample
 
       described_class.call(params.merge(account_type: type))
 
-      expect(Months::AddIncome).not_to have_received(:call)
+      expect(MonthlyBudgets::UpdateAmount).not_to have_received(:call)
     end
   end
 
