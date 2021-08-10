@@ -3,7 +3,9 @@
 require 'rails_helper'
 
 describe MonthlyBudgets::Create do
-  let(:month) { create(:month) }
+  let(:month) do
+    create(:month, budgeted: 0, to_be_budgeted: 50_00, income: 50_00)
+  end
   let(:params) do
     {
       budgeted: 4_000,
@@ -21,10 +23,14 @@ describe MonthlyBudgets::Create do
     )
   end
 
-  it 'updates the month budgeted amount' do
-    expect do
-      described_class.call(params)
-    end.to change { month.reload.budgeted }.by(4_000)
+  it 'moves money from to_be_budgeted to budgeted' do
+    described_class.call(params)
+    
+    expect(month.reload).to have_attributes(
+      budgeted: 40_00,
+      to_be_budgeted: 10_00,
+      income: 50_00,
+    )
   end
 
   context 'when already exists a monthly budget on this month and category' do

@@ -30,6 +30,7 @@ module MonthlyBudgets
     def update_month
       month.update!(
         budgeted: month.budgeted + monthly_budget.budgeted,
+        to_be_budgeted: month.to_be_budgeted - monthly_budget.budgeted,
       )
     end
 
