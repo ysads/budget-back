@@ -20,9 +20,11 @@ describe Api::TransactionSerializer do
           memo: transaction.memo,
           monthly_budget_id: transaction.monthly_budget_id,
           origin_id: transaction.origin_id,
+          outflow: transaction.outflow,
           payee_id: transaction.payee_id,
           payee_name: transaction.payee.name,
           reference_at: transaction.reference_at,
+          unsigned_amount: transaction.unsigned_amount,
         },
         relationships: {
           monthly_budget: {

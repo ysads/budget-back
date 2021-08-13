@@ -8,7 +8,15 @@ class Transaction < ApplicationRecord
 
   validates :amount, :reference_at, presence: true
 
+  def income?
+    monthly_budget.nil?
+  end
+
   def cleared?
     cleared_at.present?
+  end
+
+  def unsigned_amount
+    amount.abs
   end
 end
