@@ -18,7 +18,7 @@ module Accounts
 
     private
 
-    attr_accessor :account, :month, :params, :transaction
+    attr_accessor :account, :params, :transaction
 
     def initial_balance
       return params[:current_balance] unless account.debt?
@@ -57,7 +57,7 @@ module Accounts
       Accounts::UpdateBalance.call(
         account: account,
         amount: transaction.amount,
-        cleared: transaction.cleared?
+        cleared: transaction.cleared?,
       )
     end
 
@@ -67,7 +67,7 @@ module Accounts
       MonthlyBudgets::UpdateAmount.call(
         amount: initial_balance,
         amount_type: :income,
-        month: month
+        month: month,
       )
     end
 

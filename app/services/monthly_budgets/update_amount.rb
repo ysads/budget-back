@@ -29,13 +29,12 @@ module MonthlyBudgets
         amount_type, monthly_budget[amount_type] + amount
       )
     end
-      
+
     def update_month
       month.update_attribute(amount_type, month[amount_type] + amount)
+      return unless income?
 
-      if income?
-        month.update_attribute(:to_be_budgeted, month.to_be_budgeted + amount)
-      end
+      month.update_attribute(:to_be_budgeted, month.to_be_budgeted + amount)
     end
 
     def income?

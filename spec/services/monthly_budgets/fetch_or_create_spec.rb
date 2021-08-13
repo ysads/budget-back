@@ -22,7 +22,7 @@ describe MonthlyBudgets::FetchOrCreate do
     end
   end
 
-  context "" do
+  context '' do
     it 'creates a new monthly budget' do
       expect do
         described_class.call(params: params)

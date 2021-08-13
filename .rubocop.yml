@@ -55,6 +55,9 @@ Metrics/BlockLength:
     - 'spec/factories/**/*'
     - 'config/routes.rb'
 
+Naming/VariableNumber:
+    EnforcedStyle: snake_case
+
 Style/Documentation:
   Enabled: false
 

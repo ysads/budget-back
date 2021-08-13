@@ -30,7 +30,7 @@ module Api
 
     def serialize(records)
       Api::TransactionSerializer.new(
-        records, include: %i[monthly_budget origin payee],
+        records, include: %i[monthly_budget origin payee]
       )
     end
 

@@ -16,6 +16,7 @@ module Transactions
 
     attr_accessor :transaction, :params
 
+    # rubocop:disable Metrics/MethodLength
     def updated_params
       {
         amount: signed_amount,
@@ -29,6 +30,7 @@ module Transactions
         reference_at: params[:reference_at],
       }
     end
+    # rubocop:enable Metrics/MethodLength
 
     def income?
       params[:category_id].blank?
@@ -58,7 +60,7 @@ module Transactions
       return if income?
 
       @monthly_budget ||= ::MonthlyBudgets::FetchOrCreate.call(
-        params: params.merge(month: month)
+        params: params.merge(month: month),
       )
     end
   end

@@ -25,7 +25,7 @@ describe MonthlyBudgets::Create do
 
   it 'moves money from to_be_budgeted to budgeted' do
     described_class.call(params)
-    
+
     expect(month.reload).to have_attributes(
       budgeted: 40_00,
       to_be_budgeted: 10_00,

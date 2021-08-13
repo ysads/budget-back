@@ -29,7 +29,7 @@ describe Accounts::CreateWithStartingBalance do
     expect(Accounts::UpdateBalance).to have_received(:call).with(
       account: Account::Base.last,
       amount: transaction.amount,
-      cleared: transaction.cleared?
+      cleared: transaction.cleared?,
     )
   end
 
@@ -45,7 +45,7 @@ describe Accounts::CreateWithStartingBalance do
       expect(Accounts::UpdateBalance).to have_received(:call).with(
         account: Account::Base.last,
         amount: transaction.amount,
-        cleared: transaction.cleared?
+        cleared: transaction.cleared?,
       )
     end
   end

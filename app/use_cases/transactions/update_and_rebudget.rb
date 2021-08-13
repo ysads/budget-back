@@ -25,10 +25,11 @@ module Transactions
     def update_transaction
       @transaction = Transactions::Update.call(
         transaction: transaction,
-        updated_params: params
+        updated_params: params,
       )
     end
 
+    # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     def undo_previous_totals
       amount_type = transaction.income? ? :income : :activity
 
@@ -41,7 +42,7 @@ module Transactions
       Accounts::UpdateBalance.call(
         account: transaction.origin,
         amount: -transaction.amount,
-        cleared: transaction.cleared?
+        cleared: transaction.cleared?,
       )
     end
 
@@ -57,8 +58,9 @@ module Transactions
       Accounts::UpdateBalance.call(
         account: transaction.origin,
         amount: transaction.amount,
-        cleared: transaction.cleared?
+        cleared: transaction.cleared?,
       )
     end
+    # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
   end
 end

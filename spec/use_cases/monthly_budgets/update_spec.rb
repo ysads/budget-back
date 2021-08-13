@@ -26,7 +26,7 @@ describe MonthlyBudgets::Update do
 
   it 'updates the month budgeted amount' do
     described_class.call(params)
-    
+
     expect(month.reload).to have_attributes(
       budgeted: 3_000,
       to_be_budgeted: 7_000,

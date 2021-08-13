@@ -19,8 +19,9 @@ module Transactions
 
     private
 
-    attr_accessor :month, :transaction
+    attr_accessor :transaction
 
+    # rubocop:disable Metrics/MethodLength
     def create_transaction
       @transaction = Transaction.create!(
         amount: signed_amount,
@@ -34,6 +35,7 @@ module Transactions
         reference_at: params[:reference_at],
       )
     end
+    # rubocop:enable Metrics/MethodLength
 
     def update_month
       amount_type = income? ? :income : :activity
@@ -50,7 +52,7 @@ module Transactions
       ::Accounts::UpdateBalance.call(
         account: origin_account,
         amount: transaction.amount,
-        cleared: transaction.cleared?
+        cleared: transaction.cleared?,
       )
     end
 
@@ -82,7 +84,7 @@ module Transactions
       return if income?
 
       @monthly_budget ||= ::MonthlyBudgets::FetchOrCreate.call(
-        params: params.merge(month: month)
+        params: params.merge(month: month),
       )
     end
 

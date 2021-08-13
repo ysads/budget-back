@@ -55,7 +55,7 @@ describe Transactions::Register do
     expect(Accounts::UpdateBalance).to have_received(:call).with(
       account: origin_account,
       amount: transaction.amount,
-      cleared: transaction.cleared?
+      cleared: transaction.cleared?,
     )
   end
 

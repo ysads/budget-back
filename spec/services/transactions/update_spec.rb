@@ -26,7 +26,8 @@ describe Transactions::Update do
   after { travel_back }
 
   it 'updates transaction params' do
-    result = described_class.call(transaction: transaction, updated_params: params)
+    result = described_class.call(transaction: transaction,
+                                  updated_params: params)
 
     expect(result).to have_attributes(
       amount: -params[:amount],
@@ -50,8 +51,9 @@ describe Transactions::Update do
                    iso_month: IsoMonth.of(params[:reference_at]))
     monthly_budget = create(:monthly_budget, category: category, month: month)
 
-    result = described_class.call(transaction: transaction, updated_params: params)
-  
+    result = described_class.call(transaction: transaction,
+                                  updated_params: params)
+
     expect(result).to have_attributes(
       month: month,
       monthly_budget: monthly_budget,
@@ -60,7 +62,7 @@ describe Transactions::Update do
 
   context 'when there is no month matching reference_at' do
     it 'creates a new month' do
-      params[:reference_at] = "2010-01-01 05:00:00"
+      params[:reference_at] = '2010-01-01 05:00:00'
 
       expect do
         described_class.call(transaction: transaction, updated_params: params)
@@ -70,7 +72,7 @@ describe Transactions::Update do
 
   context 'when there is no monthly_budget matching updated attributes' do
     it 'creates a new monthly budget' do
-      params[:reference_at] = "2010-01-01 05:00:00"
+      params[:reference_at] = '2010-01-01 05:00:00'
 
       expect do
         described_class.call(transaction: transaction, updated_params: params)

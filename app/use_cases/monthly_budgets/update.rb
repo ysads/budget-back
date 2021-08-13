@@ -18,10 +18,18 @@ module MonthlyBudgets
 
     attr_accessor :monthly_budget, :previous_budgeted
 
+    def updated_budgeted
+      month.budgeted - previous_budgeted + monthly_budget.budgeted
+    end
+
+    def updated_to_be_budgeted
+      month.to_be_budgeted + previous_budgeted - monthly_budget.budgeted
+    end
+
     def update_month
       month.update!(
-        budgeted: month.budgeted - previous_budgeted + monthly_budget.budgeted,
-        to_be_budgeted: month.to_be_budgeted + previous_budgeted - monthly_budget.budgeted,
+        budgeted: updated_budgeted,
+        to_be_budgeted: updated_to_be_budgeted,
       )
     end
 
