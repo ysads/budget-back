@@ -32,8 +32,6 @@ describe Accounts::Create do
   context 'when there is an account with same type and name' do
     it 'raises DuplicateError' do
       create(:random_account,
-             :with_type,
-             type: type,
              budget_id: budget.id,
              name: name)
 

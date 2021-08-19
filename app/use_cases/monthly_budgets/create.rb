@@ -30,6 +30,7 @@ module MonthlyBudgets
     def update_month
       month.update!(
         budgeted: month.budgeted + monthly_budget.budgeted,
+        to_be_budgeted: month.to_be_budgeted - monthly_budget.budgeted,
       )
     end
 
@@ -41,7 +42,7 @@ module MonthlyBudgets
     end
 
     def month
-      @month ||= monthly_budget.month
+      @month ||= Month.find(params[:month_id])
     end
   end
 end

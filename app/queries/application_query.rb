@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationQuery
-  def self.execute(params)
+  def self.execute(params = {})
     instance = new(params)
     instance.execute
     instance.relation

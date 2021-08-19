@@ -7,6 +7,7 @@ FactoryBot.define do
     origin { create(:random_account) }
     reference_at { Faker::Date.between(from: 1.month.ago, to: Date.current) }
 
+    month
     monthly_budget
     payee
 

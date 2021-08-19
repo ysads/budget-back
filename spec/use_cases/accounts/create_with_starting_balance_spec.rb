@@ -24,9 +24,12 @@ describe Accounts::CreateWithStartingBalance do
 
     described_class.call(params)
 
+    transaction = Transaction.last
+
     expect(Accounts::UpdateBalance).to have_received(:call).with(
       account: Account::Base.last,
-      transaction: Transaction.last,
+      amount: transaction.amount,
+      cleared: transaction.cleared?,
     )
   end
 
@@ -37,21 +40,24 @@ describe Accounts::CreateWithStartingBalance do
 
       described_class.call(params.merge(account_type: type))
 
+      transaction = Transaction.last
+
       expect(Accounts::UpdateBalance).to have_received(:call).with(
         account: Account::Base.last,
-        transaction: Transaction.last,
+        amount: transaction.amount,
+        cleared: transaction.cleared?,
       )
     end
   end
 
   context 'when creating a tracking account' do
     it 'does not call service to add income to month' do
-      allow(Months::AddIncome).to receive(:call)
+      allow(MonthlyBudgets::UpdateAmount).to receive(:call)
       type = %w[asset savings].sample
 
       described_class.call(params.merge(account_type: type))
 
-      expect(Months::AddIncome).not_to have_received(:call)
+      expect(MonthlyBudgets::UpdateAmount).not_to have_received(:call)
     end
   end
 

@@ -50,9 +50,12 @@ describe Transactions::Register do
 
     described_class.call(params)
 
+    transaction = Transaction.last
+
     expect(Accounts::UpdateBalance).to have_received(:call).with(
       account: origin_account,
-      transaction: Transaction.last,
+      amount: transaction.amount,
+      cleared: transaction.cleared?,
     )
   end
 
@@ -64,7 +67,7 @@ describe Transactions::Register do
 
       expect do
         described_class.call(params.merge(outflow: true))
-      end.to change { month.reload.activity }.by(params[:amount])
+      end.to change { month.reload.activity }.by(-params[:amount])
     end
   end
 
@@ -75,7 +78,7 @@ describe Transactions::Register do
       )
 
       expect do
-        described_class.call(params.merge(category_id: nil))
+        described_class.call(params.merge(category_id: nil, outflow: false))
       end.to change { month.reload.income }.by(params[:amount])
     end
   end

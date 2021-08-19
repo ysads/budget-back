@@ -10,13 +10,13 @@ describe MonthlyBudget do
   end
 
   describe '#available' do
-    it 'is the difference between budgeted and activity' do
+    it 'is the sum between budgeted and activity', :aggregate_failures do
       expect(
-        build(:monthly_budget, budgeted: 3_000, activity: 2_000).available,
+        build(:monthly_budget, budgeted: 3_000, activity: -2_000).available,
       ).to eq(1_000)
       expect(
         build(:monthly_budget, budgeted: 2_000, activity: 3_000).available,
-      ).to eq(-1_000)
+      ).to eq(5_000)
     end
   end
 end
