@@ -15,6 +15,7 @@ describe Api::MonthSerializer do
         attributes: {
           activity: month.activity,
           budgeted: month.budgeted,
+          budget_id: month.budget_id,
           income: month.income,
           iso_month: month.iso_month,
           to_be_budgeted: month.to_be_budgeted,
