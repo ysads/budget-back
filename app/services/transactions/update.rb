@@ -1,29 +1,24 @@
 # frozen_string_literal: true
 
 module Transactions
-  class Register < ApplicationUseCase
-    def initialize(params)
-      @params = params
+  class Update < ApplicationService
+    def initialize(transaction:, updated_params:)
+      @transaction = transaction
+      @params = updated_params
     end
 
     def call
-      ActiveRecord::Base.transaction do
-        create_transaction
-        update_month
-        update_account_balance
-
-        # INFO: Needed to fetch relationships updated in other classes
-        transaction.reload
-      end
+      transaction.update!(updated_params)
+      transaction
     end
 
     private
 
-    attr_accessor :transaction
+    attr_accessor :transaction, :params
 
     # rubocop:disable Metrics/MethodLength
-    def create_transaction
-      @transaction = Transaction.create!(
+    def updated_params
+      {
         amount: signed_amount,
         cleared_at: params[:cleared_at],
         origin_id: params[:origin_id],
@@ -33,28 +28,9 @@ module Transactions
         month: month,
         monthly_budget: monthly_budget,
         reference_at: params[:reference_at],
-      )
+      }
     end
     # rubocop:enable Metrics/MethodLength
-
-    def update_month
-      amount_type = income? ? :income : :activity
-
-      MonthlyBudgets::UpdateAmount.call(
-        amount: signed_amount,
-        amount_type: amount_type,
-        month: month,
-        monthly_budget: monthly_budget,
-      )
-    end
-
-    def update_account_balance
-      ::Accounts::UpdateBalance.call(
-        account: origin_account,
-        amount: transaction.amount,
-        cleared: transaction.cleared?,
-      )
-    end
 
     def income?
       params[:category_id].blank?
@@ -86,10 +62,6 @@ module Transactions
       @monthly_budget ||= ::MonthlyBudgets::FetchOrCreate.call(
         params: params.merge(month: month),
       )
-    end
-
-    def origin_account
-      @origin_account ||= ::Account::Base.find(params[:origin_id])
     end
   end
 end

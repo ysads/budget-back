@@ -8,8 +8,10 @@ module Api
                :memo,
                :monthly_budget_id,
                :origin_id,
+               :outflow,
                :payee_id,
-               :reference_at
+               :reference_at,
+               :unsigned_amount
 
     attribute :category_id do |object|
       object.monthly_budget&.category_id
