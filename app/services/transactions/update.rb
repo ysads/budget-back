@@ -21,7 +21,7 @@ module Transactions
       {
         amount: signed_amount,
         cleared_at: params[:cleared_at],
-        origin_id: params[:origin_id],
+        account_id: params[:account_id],
         outflow: params[:outflow],
         payee: payee,
         memo: params[:memo],

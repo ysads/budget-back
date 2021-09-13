@@ -16,10 +16,9 @@ describe Api::TransactionSerializer do
           amount: transaction.amount,
           category_id: transaction.monthly_budget.category_id,
           cleared_at: transaction.cleared_at,
-          destination_id: transaction.destination_id,
           memo: transaction.memo,
           monthly_budget_id: transaction.monthly_budget_id,
-          origin_id: transaction.origin_id,
+          account_id: transaction.account_id,
           outflow: transaction.outflow,
           payee_id: transaction.payee_id,
           payee_name: transaction.payee.name,
@@ -33,9 +32,9 @@ describe Api::TransactionSerializer do
               type: :monthly_budget,
             },
           },
-          origin: {
+          account: {
             data: {
-              id: transaction.origin_id,
+              id: transaction.account_id,
               type: :account,
             },
           },

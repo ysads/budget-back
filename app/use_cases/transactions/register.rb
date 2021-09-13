@@ -26,7 +26,7 @@ module Transactions
       @transaction = Transaction.create!(
         amount: signed_amount,
         cleared_at: params[:cleared_at],
-        origin_id: params[:origin_id],
+        account_id: params[:account_id],
         outflow: params[:outflow],
         payee: payee,
         memo: params[:memo],
@@ -50,7 +50,7 @@ module Transactions
 
     def update_account_balance
       ::Accounts::UpdateBalance.call(
-        account: origin_account,
+        account: account,
         amount: transaction.amount,
         cleared: transaction.cleared?,
       )
@@ -88,8 +88,8 @@ module Transactions
       )
     end
 
-    def origin_account
-      @origin_account ||= ::Account::Base.find(params[:origin_id])
+    def account
+      @account ||= ::Account::Base.find(params[:account_id])
     end
   end
 end

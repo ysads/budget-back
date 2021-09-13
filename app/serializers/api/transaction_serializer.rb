@@ -4,10 +4,9 @@ module Api
   class TransactionSerializer < ApplicationSerializer
     attributes :amount,
                :cleared_at,
-               :destination_id,
                :memo,
                :monthly_budget_id,
-               :origin_id,
+               :account_id,
                :outflow,
                :payee_id,
                :reference_at,
@@ -23,6 +22,6 @@ module Api
 
     belongs_to :monthly_budget
     belongs_to :payee
-    belongs_to :origin, serializer: AccountSerializer
+    belongs_to :account, serializer: AccountSerializer
   end
 end
