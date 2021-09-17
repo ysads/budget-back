@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_13_211348) do
+ActiveRecord::Schema.define(version: 2021_09_14_044603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 2021_09_13_211348) do
     t.datetime "reference_at", null: false
     t.datetime "cleared_at"
     t.integer "amount", null: false
-    t.uuid "payee_id", null: false
+    t.uuid "payee_id"
     t.uuid "monthly_budget_id"
     t.uuid "account_id", null: false
     t.datetime "created_at", precision: 6, null: false
