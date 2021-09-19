@@ -2,11 +2,12 @@
 
 module Api
   class TransactionSerializer < ApplicationSerializer
-    attributes :amount,
+    attributes :account_id,
+               :amount,
                :cleared_at,
+               :linked_transaction_id,
                :memo,
                :monthly_budget_id,
-               :account_id,
                :outflow,
                :payee_id,
                :reference_at,
@@ -17,7 +18,11 @@ module Api
     end
 
     attribute :payee_name do |object|
-      object.payee.name
+      object.payee&.name
+    end
+
+    attribute :linked_transaction_account_id do |object|
+      object.linked_transaction&.account_id
     end
 
     belongs_to :monthly_budget

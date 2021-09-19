@@ -14,5 +14,9 @@ FactoryBot.define do
     trait :uncleared do
       cleared_at { nil }
     end
+
+    trait :with_linked_transaction do
+      linked_transaction { create(:transaction) }
+    end
   end
 end
