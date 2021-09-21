@@ -12,6 +12,13 @@ module Api
       render json: serialize(transactions)
     end
 
+    # PUT /api/budgets/:budget_id/transfers
+    def update
+      transactions = Transactions::UpdateTransfer.call(update_params)
+
+      render json: serialize(transactions)
+    end
+
     private
 
     def serialize(records)
@@ -22,8 +29,14 @@ module Api
 
     def create_params
       params.permit(
-        :amount, :budget_id, :category_id, :destination_id, :id,
-        :memo, :origin_id, :outflow, :reference_at, :type
+        :amount, :budget_id, :category_id, :cleared_at, :destination_id,
+        :id, :memo, :origin_id, :outflow, :reference_at, :type
+      )
+    end
+
+    def update_params
+      create_params.merge(
+        params.permit(:destination_transaction_id, :origin_transaction_id)
       )
     end
   end
