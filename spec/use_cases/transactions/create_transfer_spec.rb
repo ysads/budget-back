@@ -32,7 +32,7 @@ describe Transactions::CreateTransfer do
     expect(transactions.first).to have_attributes(
       outflow: true,
       account_id: origin_account.id,
-      amount: -params[:amount]
+      amount: -params[:amount],
     )
   end
 
@@ -42,7 +42,7 @@ describe Transactions::CreateTransfer do
     expect(transactions.last).to have_attributes(
       outflow: false,
       account_id: destination_account.id,
-      amount: params[:amount]
+      amount: params[:amount],
     )
   end
 
@@ -62,7 +62,9 @@ describe Transactions::CreateTransfer do
   it 'updates destination account balance' do
     expect do
       described_class.call(params)
-    end.to change { destination_account.reload.cleared_balance }.by(params[:amount])
+    end.to change {
+             destination_account.reload.cleared_balance
+           }.by(params[:amount])
   end
 
   it 'does not change monthly budgets for :rebalance transfers' do
@@ -86,8 +88,8 @@ describe Transactions::CreateTransfer do
       expect(MonthlyBudgets::UpdateAmount).to have_received(:call).with(
         hash_including(
           amount: -params[:amount],
-          amount_type: :income
-        )
+          amount_type: :income,
+        ),
       )
     end
   end
@@ -105,8 +107,8 @@ describe Transactions::CreateTransfer do
       expect(MonthlyBudgets::UpdateAmount).to have_received(:call).with(
         hash_including(
           amount: -params[:amount],
-          amount_type: :activity
-        )
+          amount_type: :activity,
+        ),
       )
     end
   end

@@ -7,8 +7,8 @@ class Transaction < ApplicationRecord
   belongs_to :month
   belongs_to :linked_transaction,
              class_name: 'Transaction',
-            foreign_key: 'linked_transaction_id',
-            optional: true
+             foreign_key: 'linked_transaction_id',
+             optional: true
 
   validates :amount, :reference_at, presence: true
 

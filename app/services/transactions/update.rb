@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# FIXME: move me into update
 module Transactions
   class Update < ApplicationService
     def initialize(transaction:, updated_params:)
