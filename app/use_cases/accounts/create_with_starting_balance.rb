@@ -45,7 +45,7 @@ module Accounts
       @transaction = Transaction.create!(
         amount: initial_balance,
         cleared_at: DateTime.current,
-        origin: account,
+        account: account,
         outflow: account.debt?,
         month: month,
         payee: starting_balance_payee,

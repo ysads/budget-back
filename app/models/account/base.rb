@@ -12,6 +12,10 @@ module Account
       nature.eql?(:budget)
     end
 
+    def tracking?
+      !budget?
+    end
+
     def balance
       cleared_balance + uncleared_balance
     end

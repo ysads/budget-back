@@ -40,7 +40,7 @@ module Transactions
         monthly_budget: transaction.monthly_budget,
       )
       Accounts::UpdateBalance.call(
-        account: transaction.origin,
+        account: transaction.account,
         amount: -transaction.amount,
         cleared: transaction.cleared?,
       )
@@ -56,7 +56,7 @@ module Transactions
         monthly_budget: transaction.monthly_budget,
       )
       Accounts::UpdateBalance.call(
-        account: transaction.origin,
+        account: transaction.account,
         amount: transaction.amount,
         cleared: transaction.cleared?,
       )

@@ -2,7 +2,7 @@
 
 class TransactionsQuery < ApplicationQuery
   def execute
-    filter_origin_id
+    filter_account_id
     sort
   end
 
@@ -12,10 +12,10 @@ class TransactionsQuery < ApplicationQuery
 
   private
 
-  def filter_origin_id
-    return unless params.key?(:origin_id)
+  def filter_account_id
+    return unless params.key?(:account_id)
 
-    @relation = relation.where(origin_id: params[:origin_id])
+    @relation = relation.where(account_id: params[:account_id])
   end
 
   def sort

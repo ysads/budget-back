@@ -7,7 +7,7 @@ describe Transactions::Update do
   let(:budget) { create(:budget) }
   let(:payee) { create(:payee, budget: budget) }
   let(:category) { create(:category, :with_budget, budget: budget) }
-  let(:origin_account) { create(:checking_account) }
+  let(:account) { create(:checking_account) }
   let(:params) do
     {
       amount: Faker::Number.between(from: 1, to: 1000),
@@ -15,7 +15,7 @@ describe Transactions::Update do
       cleared_at: Time.current.iso8601,
       memo: Faker::Lorem.sentence,
       category_id: category.id,
-      origin_id: origin_account.id,
+      account_id: account.id,
       outflow: true,
       payee_name: payee.name,
       reference_at: Time.current.iso8601,
@@ -33,7 +33,7 @@ describe Transactions::Update do
       amount: -params[:amount],
       cleared_at: DateTime.parse(params[:cleared_at]),
       memo: params[:memo],
-      origin_id: params[:origin_id],
+      account_id: params[:account_id],
       outflow: params[:outflow],
       reference_at: DateTime.parse(params[:reference_at]),
     )

@@ -17,6 +17,8 @@ describe Api::AccountSerializer do
           balance: account.balance,
           cleared_balance: account.cleared_balance,
           closed_at: account.closed_at,
+          is_budget: account.budget?,
+          is_tracking: account.tracking?,
           name: account.name,
           nature: account.nature,
           uncleared_balance: account.uncleared_balance,

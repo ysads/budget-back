@@ -30,19 +30,19 @@ module Api
 
     def serialize(records)
       Api::TransactionSerializer.new(
-        records, include: %i[monthly_budget origin payee]
+        records, include: %i[monthly_budget account payee]
       )
     end
 
     def create_params
       params.permit(
         :amount, :budget_id, :cleared_at, :category_id, :id,
-        :memo, :origin_id, :outflow, :payee_name, :reference_at
+        :memo, :account_id, :outflow, :payee_name, :reference_at
       )
     end
 
     def index_params
-      params.permit(:origin_id)
+      params.permit(:account_id)
     end
   end
 end

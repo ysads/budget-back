@@ -3,11 +3,11 @@
 require 'rails_helper'
 
 describe TransactionsQuery do
-  it 'filters by origin id' do
+  it 'filters by account id' do
     transaction = create(:transaction)
     create(:transaction)
 
-    response = described_class.execute(origin_id: transaction.origin_id)
+    response = described_class.execute(account_id: transaction.account_id)
 
     expect(response).to contain_exactly(transaction)
   end

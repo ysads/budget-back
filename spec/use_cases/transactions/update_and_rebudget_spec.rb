@@ -29,7 +29,7 @@ describe Transactions::UpdateAndRebudget do
       cleared_at: nil,
       id: transaction.id,
       memo: Faker::Lorem.sentence,
-      origin_id: transaction.origin_id,
+      account_id: transaction.account_id,
       outflow: true,
       payee_name: new_payee.name,
       reference_at: new_reference,
@@ -47,7 +47,7 @@ describe Transactions::UpdateAndRebudget do
     expect(Transaction.last).to have_attributes(
       cleared_at: nil,
       memo: params[:memo],
-      origin_id: params[:origin_id],
+      account_id: params[:account_id],
       outflow: params[:outflow],
       payee: new_payee,
       monthly_budget: new_monthly_budget,
