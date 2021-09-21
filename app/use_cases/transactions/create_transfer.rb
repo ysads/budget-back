@@ -64,10 +64,10 @@ module Transactions
 
     def link_transactions
       origin_transaction.update!(
-        linked_transaction_id: destination_transaction.id
+        linked_transaction_id: destination_transaction.id,
       )
       destination_transaction.update!(
-        linked_transaction_id: origin_transaction.id
+        linked_transaction_id: origin_transaction.id,
       )
     end
 

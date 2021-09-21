@@ -1,11 +1,16 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/ClassLength
 module Transactions
   class UpdateTransfer < ApplicationUseCase
     def initialize(params)
       @params = params
-      @origin_transaction = Transaction.find(params[:origin_transaction_id])
-      @destination_transaction = Transaction.find(params[:destination_transaction_id])
+      @origin_transaction = Transaction.find(
+        params[:origin_transaction_id],
+      )
+      @destination_transaction = Transaction.find(
+        params[:destination_transaction_id],
+      )
     end
 
     def call
@@ -28,8 +33,6 @@ module Transactions
 
     def undo_budgeting
       return if natures_match?
-
-      amount_type = origin_transaction.monthly_budget.present? ? :activity : :income
 
       MonthlyBudgets::UpdateAmount.call(
         amount: -origin_transaction.amount,
@@ -54,8 +57,6 @@ module Transactions
 
     def add_budgeting
       return if natures_match?
-
-      amount_type = origin_transaction.monthly_budget.present? ? :activity : :income
 
       MonthlyBudgets::UpdateAmount.call(
         amount: params[:amount],
@@ -84,7 +85,14 @@ module Transactions
     end
 
     def natures_match?
-      origin_transaction.account.nature === destination_transaction.account.nature
+      origin_transaction.account.nature ==
+        destination_transaction.account.nature
+    end
+
+    def amount_type
+      return :activity if origin_transaction.monthly_budget.present?
+
+      :income
     end
 
     def spending?
@@ -137,3 +145,4 @@ module Transactions
     end
   end
 end
+# rubocop:enable Metrics/ClassLength

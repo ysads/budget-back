@@ -36,7 +36,7 @@ module Api
 
     def update_params
       create_params.merge(
-        params.permit(:destination_transaction_id, :origin_transaction_id)
+        params.permit(:destination_transaction_id, :origin_transaction_id),
       )
     end
   end

@@ -81,7 +81,8 @@ describe Api::TransactionSerializer do
           type: :transaction,
           attributes: hash_including(
             linked_transaction_id: transaction.linked_transaction_id,
-            linked_transaction_account_id: transaction.linked_transaction.account_id,
+            linked_transaction_account_id:
+              transaction.linked_transaction.account_id,
           ),
         ),
       )
