@@ -9,6 +9,9 @@ module Api
                :nature,
                :uncleared_balance
 
+    attribute :is_budget, &:budget?
+    attribute :is_tracking, &:tracking?
+
     attribute :type do |obj|
       obj.type.split('::').last.downcase
     end

@@ -4,10 +4,11 @@ require 'rails_helper'
 
 describe Transaction do
   describe 'relationships' do
-    it { is_expected.to belong_to(:payee) }
-    it { is_expected.to belong_to(:origin).class_name('Account::Base') }
+    it { is_expected.to belong_to(:payee).optional(true) }
+    it { is_expected.to belong_to(:account).class_name('Account::Base') }
     it { is_expected.to belong_to(:monthly_budget).optional(true) }
     it { is_expected.to belong_to(:month) }
+    it { is_expected.to belong_to(:linked_transaction).optional(true) }
   end
 
   describe 'validations' do

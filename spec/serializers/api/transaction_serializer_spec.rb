@@ -16,10 +16,11 @@ describe Api::TransactionSerializer do
           amount: transaction.amount,
           category_id: transaction.monthly_budget.category_id,
           cleared_at: transaction.cleared_at,
-          destination_id: transaction.destination_id,
           memo: transaction.memo,
           monthly_budget_id: transaction.monthly_budget_id,
-          origin_id: transaction.origin_id,
+          linked_transaction_id: nil,
+          linked_transaction_account_id: nil,
+          account_id: transaction.account_id,
           outflow: transaction.outflow,
           payee_id: transaction.payee_id,
           payee_name: transaction.payee.name,
@@ -33,9 +34,9 @@ describe Api::TransactionSerializer do
               type: :monthly_budget,
             },
           },
-          origin: {
+          account: {
             data: {
-              id: transaction.origin_id,
+              id: transaction.account_id,
               type: :account,
             },
           },
@@ -62,6 +63,26 @@ describe Api::TransactionSerializer do
           type: :transaction,
           attributes: hash_including(
             category_id: nil,
+          ),
+        ),
+      )
+    end
+  end
+
+  context 'when transaction has a linked transaction' do
+    it "renders linked_transaction's account_id" do
+      transaction = create(:transaction, :with_linked_transaction)
+
+      result = described_class.new(transaction).serializable_hash
+
+      expect(result).to include(
+        data: hash_including(
+          id: transaction.id,
+          type: :transaction,
+          attributes: hash_including(
+            linked_transaction_id: transaction.linked_transaction_id,
+            linked_transaction_account_id:
+              transaction.linked_transaction.account_id,
           ),
         ),
       )
