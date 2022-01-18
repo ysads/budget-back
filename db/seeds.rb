@@ -1,14 +1,7 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-require('faker')
+puts "Running seeds"
 
 # ｡･:*:･ﾟ★,｡･:*:･ﾟ☆｡･:*:･ﾟ★,｡･:*:･ﾟ☆｡･:*:･ﾟ★,｡･:*:･ﾟ☆｡･:*:･ﾟ★,｡･:*:･ﾟ☆
-# 1. Users
+puts "1. Users..."
 user = User.create!(
   name: 'Test user',
   email: 'test@mail.com',
@@ -16,16 +9,16 @@ user = User.create!(
 )
 
 # ｡･:*:･ﾟ★,｡･:*:･ﾟ☆｡･:*:･ﾟ★,｡･:*:･ﾟ☆｡･:*:･ﾟ★,｡･:*:･ﾟ☆｡･:*:･ﾟ★,｡･:*:･ﾟ☆
-# 2. Budgets
+puts "2. Budgets..."
 budget = Budget.create!(
   name: 'EUR Budget',
   currency: 'EUR',
-  date_format: 'dd.MM.YYYY',
+  date_format: 'DD.MM.YYYY',
   user: user
 )
 
 # ｡･:*:･ﾟ★,｡･:*:･ﾟ☆｡･:*:･ﾟ★,｡･:*:･ﾟ☆｡･:*:･ﾟ★,｡･:*:･ﾟ☆｡･:*:･ﾟ★,｡･:*:･ﾟ☆
-# 3. Categories & Category Groups
+puts "3. Categories & Category Groups..."
 groups = ['Fixed', 'Variable', 'Subscriptions', 'Savings'].map do |group_name|
   CategoryGroup.create!(
     budget: budget,
@@ -58,7 +51,7 @@ end
 end
 
 # ｡･:*:･ﾟ★,｡･:*:･ﾟ☆｡･:*:･ﾟ★,｡･:*:･ﾟ☆｡･:*:･ﾟ★,｡･:*:･ﾟ☆｡･:*:･ﾟ★,｡･:*:･ﾟ☆
-# 4. Payees
+puts "4. Payees..."
 [
   'Starting balance',
   'Amazon',
@@ -77,9 +70,8 @@ end
   )  
 end
 
-
 # ｡･:*:･ﾟ★,｡･:*:･ﾟ☆｡･:*:･ﾟ★,｡･:*:･ﾟ☆｡･:*:･ﾟ★,｡･:*:･ﾟ☆｡･:*:･ﾟ★,｡･:*:･ﾟ☆
-# 5. Months
+puts "5. Months..."
 [2.months.ago, 1.month.ago, Date.current].map do |date|
   Month.create!(
     activity: 0,
@@ -90,3 +82,30 @@ end
     to_be_budgeted: 0,
   )
 end
+
+# ｡･:*:･ﾟ★,｡･:*:･ﾟ☆｡･:*:･ﾟ★,｡･:*:･ﾟ☆｡･:*:･ﾟ★,｡･:*:･ﾟ☆｡･:*:･ﾟ★,｡･:*:･ﾟ☆
+puts "6. Accounts..."
+Account::Checking.create!(
+  budget: budget,
+  name: 'Erste Bank',
+  cleared_balance: 1750_00,
+  uncleared_balance: 0
+)
+Account::Checking.create!(
+  budget: budget,
+  name: 'N26',
+  cleared_balance: 525_00,
+  uncleared_balance: 350_00
+)
+Account::Savings.create!(
+  budget: budget,
+  name: 'Laptop Pot',
+  cleared_balance: 1825_00,
+  uncleared_balance: 0
+)
+Account::Asset.create!(
+  budget: budget,
+  name: 'Binance',
+  cleared_balance: 150_00,
+  uncleared_balance: 930_75,
+)
