@@ -210,6 +210,8 @@ GEM
     timecop (0.9.4)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    tzinfo-data (1.2021.5)
+      tzinfo (>= 1.0.0)
     unicode-display_width (2.1.0)
     warden (1.2.9)
       rack (>= 2.0.9)
@@ -241,6 +243,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen
   timecop
+  tzinfo-data
 
 RUBY VERSION
    ruby 2.7.1p83
