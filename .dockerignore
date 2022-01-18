@@ -1,0 +1,6 @@
+.github/
+log/
+tmp/
+
+.gitignore
+README.md

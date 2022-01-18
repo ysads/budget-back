@@ -1,0 +1,23 @@
+version: '3.1'
+services:
+  web:
+    build: '.'
+    depends_on:
+      - db
+    ports:
+      - 9091:3000
+    volumes:
+      - .:/web
+    environment:
+      - DB_HOST=db
+      - DB_USERNAME=db_user
+      - DB_PASSWORD=db_pass
+  db:
+    image: postgres:11.14-alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=db_pass
+      - POSTGRES_USER=db_user
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data

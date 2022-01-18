@@ -11,6 +11,7 @@ gem 'puma'
 gem 'rack-cors'
 gem 'rails'
 gem 'bootsnap'
+gem 'tzinfo-data'
 
 group :development, :test do
   gem 'amazing_print'
