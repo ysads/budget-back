@@ -75,9 +75,10 @@ module Transactions
       return if rebalance?
 
       amount_type = spending? ? :activity : :income
+      amount = spending? ? signed_amount : -signed_amount
 
       MonthlyBudgets::UpdateAmount.call(
-        amount: signed_amount,
+        amount: amount,
         amount_type: amount_type,
         month: month,
         monthly_budget: monthly_budget,

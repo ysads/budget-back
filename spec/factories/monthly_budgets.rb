@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :monthly_budget do
-    activity { rand(100_000) }
+    activity { Faker::Number.within(range: -1_000_00..0) }
     budgeted { rand(100_000) }
     category
     month

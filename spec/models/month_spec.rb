@@ -14,5 +14,23 @@ describe Month do
     it { is_expected.to validate_presence_of(:budgeted) }
     it { is_expected.to validate_presence_of(:activity) }
     it { is_expected.to validate_presence_of(:to_be_budgeted) }
+
+    it 'validates activity is at most zero' do
+      expect(build(:month, activity: 10_00)).not_to be_valid
+      expect(build(:month, activity: 0)).to be_valid
+      expect(build(:month, activity: -10_00)).to be_valid
+    end
+
+    it 'validates income is at least zero' do
+      expect(build(:month, income: 10_00)).to be_valid
+      expect(build(:month, income: 0)).to be_valid
+      expect(build(:month, income: -10_00)).not_to be_valid
+    end
+
+    it 'validates budgeted is at least zero' do
+      expect(build(:month, budgeted: 10_00)).to be_valid
+      expect(build(:month, budgeted: 0)).to be_valid
+      expect(build(:month, budgeted: -10_00)).not_to be_valid
+    end
   end
 end

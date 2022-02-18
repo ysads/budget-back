@@ -62,9 +62,9 @@ describe Transactions::CreateTransfer do
   it 'updates destination account balance' do
     expect do
       described_class.call(params)
-    end.to change {
-             destination_account.reload.cleared_balance
-           }.by(params[:amount])
+    end.to(
+      change { destination_account.reload.cleared_balance }.by(params[:amount]),
+    )
   end
 
   it 'does not change monthly budgets for :rebalance transfers' do
@@ -87,7 +87,7 @@ describe Transactions::CreateTransfer do
 
       expect(MonthlyBudgets::UpdateAmount).to have_received(:call).with(
         hash_including(
-          amount: -params[:amount],
+          amount: params[:amount],
           amount_type: :income,
         ),
       )
