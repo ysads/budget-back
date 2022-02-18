@@ -34,12 +34,12 @@ module Transactions
     def undo_budgeting
       return if natures_match?
 
-      MonthlyBudgets::UpdateAmount.call(
-        amount: -origin_transaction.amount,
-        amount_type: amount_type,
-        month: origin_transaction.month,
-        monthly_budget: origin_transaction.monthly_budget,
-      )
+      # FIXME: month's activity is positive... why?
+      if origin_transaction.income?
+        update_monthly_amounts(origin_transaction.amount)
+      else
+        update_monthly_amounts(destination_transaction.amount)
+      end
     end
 
     def undo_accounts_balance
@@ -58,8 +58,16 @@ module Transactions
     def add_budgeting
       return if natures_match?
 
+      if origin_transaction.income?
+        update_monthly_amounts(destination_transaction.amount)
+      else
+        update_monthly_amounts(origin_transaction.amount)
+      end
+    end
+
+    def update_monthly_amounts(amount)
       MonthlyBudgets::UpdateAmount.call(
-        amount: params[:amount],
+        amount: amount,
         amount_type: amount_type,
         month: origin_transaction.month,
         monthly_budget: origin_transaction.monthly_budget,
@@ -90,13 +98,17 @@ module Transactions
     end
 
     def amount_type
-      return :activity if origin_transaction.monthly_budget.present?
+      return :income if origin_transaction.income?
 
-      :income
+      :activity
     end
 
     def spending?
       params[:type].to_sym == :spending
+    end
+
+    def income?
+      params[:type].to_sym == :income
     end
 
     def update_origin_transaction
