@@ -15,5 +15,5 @@ test:
   database: budget_test
 
 production:
-  <<: *default
-  database: <%= ENV['DB_NAME'] %>
+  url: <%= ENV.fetch("DB_URL") %>
+  database: <%= ENV.fetch("DB_NAME") %>

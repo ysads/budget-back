@@ -1,6 +1,6 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'localhost:9090'
+    origins *ENV.fetch('CORS_ORIGINS').split(',')
 
     resource '*',
              credentials: true,
