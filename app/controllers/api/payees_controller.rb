@@ -2,7 +2,7 @@
 
 module Api
   class PayeesController < ApplicationController
-    before_action :authenticate_user!
+    before_action :authenticate_request!
     before_action :authorize_budget!
 
     # GET /budgets/:id/payees

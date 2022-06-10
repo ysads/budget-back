@@ -2,7 +2,7 @@
 
 module Api
   class TransactionsController < ApplicationController
-    before_action :authenticate_user!
+    before_action :authenticate_request!
     before_action :authorize_budget!
 
     # POST /api/budgets/:budget_id/transactions

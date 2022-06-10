@@ -2,7 +2,7 @@
 
 module Api
   class BudgetsController < ApplicationController
-    before_action :authenticate_user!
+    before_action :authenticate_request!
 
     def create
       Budget.create!(permitted_params)

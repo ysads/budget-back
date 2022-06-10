@@ -2,7 +2,7 @@
 
 module Api
   class CategoryGroupsController < ApplicationController
-    before_action :authenticate_user!
+    before_action :authenticate_request!
     before_action :authorize_budget!
 
     # POST /api/budgets/:budget_id/category_groups

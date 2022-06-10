@@ -2,7 +2,7 @@
 
 module Api
   class MonthsController < ApplicationController
-    before_action :authenticate_user!
+    before_action :authenticate_request!
     before_action :authorize_budget!
 
     # GET /api/budgets/:budget_id/months

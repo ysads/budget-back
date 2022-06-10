@@ -16,4 +16,4 @@ test:
 
 production:
   url: <%= ENV.fetch("DB_URL") %>
-  database: <%= ENV.fetch("DB_NAME") %>
+  database: <%= ENV.fetch("DB_NAME", "budget_production") %>

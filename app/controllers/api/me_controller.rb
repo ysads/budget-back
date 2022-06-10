@@ -2,7 +2,7 @@
 
 module Api
   class MeController < ApplicationController
-    before_action :authenticate_user!
+    before_action :authenticate_request!
 
     def show
       render json: MeSerializer.new(current_user)

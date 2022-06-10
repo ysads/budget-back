@@ -27,5 +27,6 @@ module InabBack
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     # config.api_only = true
+    config.session_store :cookie_store, key: '_budget_back_session', domain: :all
   end
 end
