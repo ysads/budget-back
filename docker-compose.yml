@@ -1,7 +1,7 @@
-version: '3.1'
+version: "3.1"
 services:
   web:
-    build: '.'
+    build: "."
     depends_on:
       - db
     ports:
@@ -9,13 +9,12 @@ services:
     volumes:
       - .:/web
     environment:
-      - AUTH0_AUDIENCE="${AUTH0_AUDIENCE}"
-      - AUTH0_DOMAIN="${AUTH0_DOMAIN}"
+      - AUTH0_AUDIENCE=${AUTH0_AUDIENCE}
+      - AUTH0_DOMAIN=${AUTH0_DOMAIN}
       - CORS_ORIGINS=http://localhost:9090
-      - DB_HOST=db
-      - DB_USERNAME=db_user
-      - DB_PASSWORD=db_pass
-      - RAILS_ENV="${RAILS_ENV}"
+      - DATABASE_URL=postgresql://db_user:db_pass@db:5432/budget_development
+      # - DATABASE_URL=postgresql://user:secret@localhost
+      - RAILS_ENV=development
   db:
     image: postgres:11.14-alpine
     ports:
