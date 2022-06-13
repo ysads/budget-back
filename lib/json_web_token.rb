@@ -4,20 +4,20 @@ require 'uri'
 class JsonWebToken
   def self.verify(token)
     options = {
-      algorithm: 'RS256',
+      algorithms: 'RS256',
       iss: self.auth0_domain,
       verify_iss: true,
-      aud: self.auth0_audience
-      verify_aud: true
+      aud: self.auth0_audience,
+      verify_aud: true,
     }
 
-    JWT.decode(token, nil, options) do |header|
+    JWT.decode(token, nil, true, options) do |header|
       jwks_hash[header['kid']]
     end
   end
 
   def self.jwks_hash
-    jwks_raw = Net::HTTP.get URI("https://#{self.auth0_domain}/.well-known/jwks.json")
+    jwks_raw = Net::HTTP.get(URI("#{self.auth0_domain}.well-known/jwks.json"))
     jwks_keys = Array(JSON.parse(jwks_raw)['keys'])
     Hash[
       jwks_keys
