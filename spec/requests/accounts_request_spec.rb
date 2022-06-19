@@ -5,13 +5,18 @@ require 'rails_helper'
 describe Api::AccountsController do
   let(:budget) { create(:budget) }
   let(:headers) do
-    { Accept: 'application/json' }
+    {
+      Accept: 'application/json',
+      Authorization: 'Bearer token',
+    }
   end
 
   describe 'GET /api/budgets/:id/accounts/' do
     context 'when there is no authorization' do
       it 'returns :unauthorized' do
-        get '/api/budgets/:id/accounts', headers: headers
+        get '/api/budgets/:id/accounts', headers: {
+          Accept: 'application/json',
+        }
 
         expect(response).to have_http_status(:unauthorized)
       end
@@ -21,7 +26,7 @@ describe Api::AccountsController do
       it 'returns :unauthorized' do
         other_budget = create(:budget)
 
-        sign_in(budget.user)
+        mock_auth!(budget.user)
 
         get "/api/budgets/#{other_budget.id}/accounts", headers: headers
 
@@ -34,9 +39,8 @@ describe Api::AccountsController do
       asset_account = create(:asset_account, budget: budget)
       checking_account = create(:checking_account, budget: budget)
 
+      mock_auth!(budget.user)
       allow(Api::AccountSerializer).to receive(:new)
-
-      sign_in(budget.user)
 
       get "/api/budgets/#{budget.id}/accounts", headers: headers
 
@@ -64,7 +68,7 @@ describe Api::AccountsController do
         other_budget = create(:budget)
         account = create(:random_account, budget: other_budget)
 
-        sign_in(budget.user)
+        mock_auth!(budget.user)
 
         get "/api/budgets/#{other_budget.id}/accounts/#{account.id}",
             headers: headers
@@ -75,7 +79,7 @@ describe Api::AccountsController do
 
     context 'when there is no account in given budget with given id' do
       it 'returns :not_found' do
-        sign_in(budget.user)
+        mock_auth!(budget.user)
 
         get "/api/budgets/#{budget.id}/accounts/random-uuid", headers: headers
 
@@ -86,9 +90,8 @@ describe Api::AccountsController do
     it 'returns the account with the specified id', :aggregate_failures do
       account = create(:random_account, budget: budget)
 
+      mock_auth!(budget.user)
       allow(Api::AccountSerializer).to receive(:new)
-
-      sign_in(budget.user)
 
       get "/api/budgets/#{budget.id}/accounts/#{account.id}", headers: headers
 

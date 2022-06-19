@@ -5,7 +5,10 @@ require 'rails_helper'
 describe Api::CategoryGroupsController do
   let(:budget) { create(:budget) }
   let(:headers) do
-    { Accept: 'application/json' }
+    {
+      Accept: 'application/json',
+      Authorization: 'Bearer token',
+    }
   end
 
   describe 'GET /api/budgets/:id/category_groups' do
@@ -24,7 +27,7 @@ describe Api::CategoryGroupsController do
       it 'returns :unauthorized' do
         other_budget = create(:budget)
 
-        sign_in(budget.user)
+        mock_auth!(budget.user)
 
         get "/api/budgets/#{other_budget.id}/category_groups",
             headers: headers
@@ -38,7 +41,7 @@ describe Api::CategoryGroupsController do
 
       allow(Api::CategoryGroupSerializer).to receive(:new)
 
-      sign_in(budget.user)
+      mock_auth!(budget.user)
 
       get "/api/budgets/#{budget.id}/category_groups", headers: headers
 

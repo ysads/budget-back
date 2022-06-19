@@ -5,7 +5,10 @@ require 'rails_helper'
 describe Api::BudgetsController do
   let(:user) { create(:user) }
   let(:headers) do
-    { Accept: 'application/json' }
+    {
+      Accept: 'application/json',
+      Authorization: 'Bearer token',
+    }
   end
 
   describe 'POST /api/budgets' do
@@ -25,7 +28,7 @@ describe Api::BudgetsController do
           date_format: 'dd.MM.YYYY',
         }
 
-        sign_in(user)
+        mock_auth!(user)
 
         expect do
           post '/api/budgets', headers: headers, params: params
@@ -52,7 +55,7 @@ describe Api::BudgetsController do
 
       allow(Api::BudgetSerializer).to receive(:new)
 
-      sign_in(user)
+      mock_auth!(user)
 
       get '/api/budgets', headers: headers
 
@@ -79,7 +82,7 @@ describe Api::BudgetsController do
 
         allow(Api::BudgetSerializer).to receive(:new)
 
-        sign_in(user)
+        mock_auth!(user)
 
         get "/api/budgets/#{budget.id}", headers: headers
 
@@ -93,7 +96,7 @@ describe Api::BudgetsController do
 
       allow(Api::BudgetSerializer).to receive(:new)
 
-      sign_in(user)
+      mock_auth!(user)
 
       get "/api/budgets/#{budget.id}", headers: headers
 

@@ -4,7 +4,10 @@ require 'rails_helper'
 
 describe Api::MeController do
   let(:headers) do
-    { Accept: 'application/json' }
+    {
+      Accept: 'application/json',
+      Authorization: 'Bearer token',
+    }
   end
 
   describe 'GET /api/me' do
@@ -18,7 +21,7 @@ describe Api::MeController do
 
     it 'returns ok', :aggregate_failures do
       user = create(:user)
-      sign_in(user)
+      mock_auth!(user)
 
       get '/api/me', headers: headers
 
