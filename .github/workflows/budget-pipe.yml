@@ -31,8 +31,7 @@ jobs:
     env:
       RAILS_ENV: test
       PGHOST: localhost
-      DB_USERNAME: test
-      DB_PASSWORD: test
+      DATABASE_URL: "postgres://test:test@localhost:5432"
   rubocop:
     runs-on: ubuntu-latest
     steps:
