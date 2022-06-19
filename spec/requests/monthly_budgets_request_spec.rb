@@ -5,7 +5,10 @@ require 'rails_helper'
 describe Api::MonthlyBudgetsController do
   let(:budget) { create(:budget) }
   let(:headers) do
-    { Accept: 'application/json' }
+    {
+      Accept: 'application/json',
+      Authorization: 'Bearer token',
+    }
   end
   let(:params) do
     {
@@ -30,7 +33,7 @@ describe Api::MonthlyBudgetsController do
       it 'returns :unauthorized' do
         other_budget = create(:budget)
 
-        sign_in(budget.user)
+        mock_auth!(budget.user)
 
         post "/api/budgets/#{other_budget.id}/monthly_budgets",
              headers: headers,
@@ -41,7 +44,7 @@ describe Api::MonthlyBudgetsController do
     end
 
     it 'creates a new monthly budget' do
-      sign_in(budget.user)
+      mock_auth!(budget.user)
 
       expect do
         post "/api/budgets/#{budget.id}/monthly_budgets",
@@ -51,7 +54,7 @@ describe Api::MonthlyBudgetsController do
     end
 
     it 'serializes the newly-created monthly budget' do
-      sign_in(budget.user)
+      mock_auth!(budget.user)
 
       allow(Api::MonthlyBudgetSerializer).to receive(:new)
 

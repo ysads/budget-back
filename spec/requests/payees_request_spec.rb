@@ -5,7 +5,10 @@ require 'rails_helper'
 describe Api::PayeesController do
   let(:budget) { create(:budget) }
   let(:headers) do
-    { Accept: 'application/json' }
+    {
+      Accept: 'application/json',
+      Authorization: 'Bearer token',
+    }
   end
 
   describe 'GET /api/budgets/:id/payees/' do
@@ -21,7 +24,7 @@ describe Api::PayeesController do
       it 'returns :unauthorized' do
         other_budget = create(:budget)
 
-        sign_in(budget.user)
+        mock_auth!(budget.user)
 
         get "/api/budgets/#{other_budget.id}/payees", headers: headers
 
@@ -36,7 +39,7 @@ describe Api::PayeesController do
 
       allow(Api::PayeeSerializer).to receive(:new)
 
-      sign_in(budget.user)
+      mock_auth!(budget.user)
 
       get "/api/budgets/#{budget.id}/payees", headers: headers
 

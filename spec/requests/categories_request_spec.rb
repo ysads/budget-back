@@ -5,7 +5,10 @@ require 'rails_helper'
 describe Api::CategoryGroupsController do
   let(:budget) { create(:budget) }
   let(:headers) do
-    { Accept: 'application/json' }
+    {
+      Accept: 'application/json',
+      Authorization: 'Bearer token',
+    }
   end
 
   describe 'POST /api/budgets/:id/categories' do
@@ -31,7 +34,7 @@ describe Api::CategoryGroupsController do
       it 'returns :unauthorized' do
         other_budget = create(:budget)
 
-        sign_in(budget.user)
+        mock_auth!(budget.user)
 
         post "/api/budgets/#{other_budget.id}/categories",
              headers: headers,
@@ -42,7 +45,7 @@ describe Api::CategoryGroupsController do
     end
 
     it 'creates a new category within given budget', :aggregate_failures do
-      sign_in(budget.user)
+      mock_auth!(budget.user)
 
       expect do
         post "/api/budgets/#{budget.id}/categories",
@@ -59,7 +62,7 @@ describe Api::CategoryGroupsController do
     it 'serializes back the newly created category', :aggregate_failures do
       allow(Api::CategorySerializer).to receive(:new)
 
-      sign_in(budget.user)
+      mock_auth!(budget.user)
 
       post "/api/budgets/#{budget.id}/categories",
            headers: headers,
@@ -88,7 +91,7 @@ describe Api::CategoryGroupsController do
       it 'returns :unauthorized' do
         other_budget = create(:budget)
 
-        sign_in(budget.user)
+        mock_auth!(budget.user)
 
         get "/api/budgets/#{other_budget.id}/categories",
             headers: headers
@@ -108,7 +111,7 @@ describe Api::CategoryGroupsController do
 
       allow(Api::CategorySerializer).to receive(:new)
 
-      sign_in(budget.user)
+      mock_auth!(budget.user)
 
       get "/api/budgets/#{budget.id}/categories", headers: headers
 
