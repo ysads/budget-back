@@ -25,10 +25,6 @@ end
 
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
-  %i[controller helper].each do |_type|
-    config.include Devise::Test::IntegrationHelpers, type: :request
-  end
-
   config.include ActiveSupport::Testing::TimeHelpers
 
   config.use_transactional_fixtures = true

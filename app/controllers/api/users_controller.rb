@@ -11,7 +11,7 @@ module Api
     private
 
     def permitted_params
-      params.permit(:name, :email, :password)
+      params.permit(:name, :email, :auth_provider_id)
     end
   end
 end
