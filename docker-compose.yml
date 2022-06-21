@@ -2,6 +2,8 @@ version: "3.1"
 services:
   web:
     build: "."
+    stdin_open: true
+    tty: true
     depends_on:
       - db
     ports:
@@ -13,7 +15,6 @@ services:
       - AUTH0_DOMAIN=${AUTH0_DOMAIN}
       - CORS_ORIGINS=http://localhost:9090
       - DATABASE_URL=postgresql://db_user:db_pass@db:5432/budget_development
-      # - DATABASE_URL=postgresql://user:secret@localhost
       - RAILS_ENV=development
   db:
     image: postgres:11.14-alpine
