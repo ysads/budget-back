@@ -2,7 +2,7 @@
 
 module Api
   class CategorySerializer < ApplicationSerializer
-    attributes :name
+    attributes :name, :is_recurring
 
     attribute :group_name do |obj|
       obj.category_group.name

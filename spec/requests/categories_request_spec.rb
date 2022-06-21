@@ -17,6 +17,7 @@ describe Api::CategoryGroupsController do
       {
         budget_id: budget.id,
         group_name: category_group.name,
+        is_recurring: [true, false].sample,
         name: Faker::Commerce.department,
       }
     end

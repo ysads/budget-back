@@ -20,7 +20,7 @@ module Api
     private
 
     def create_params
-      params.permit(:budget_id, :group_name, :name)
+      params.permit(:budget_id, :group_name, :is_recurring, :name)
     end
 
     def available_categories

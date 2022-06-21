@@ -8,7 +8,8 @@ describe Categories::CreateWithGroup do
     {
       budget_id: budget.id,
       name: Faker::Creature::Dog.name,
-      group_name: Faker::Creature::Cat.name
+      is_recurring: [true, false].sample,
+      group_name: Faker::Creature::Cat.name,
     }
   end
 
@@ -30,7 +31,7 @@ describe Categories::CreateWithGroup do
       create(:category_group, budget: budget, name: params[:group_name])
 
       expect do
-        described_class.call(params) 
+        described_class.call(params)
       end.not_to change { CategoryGroup.count }
     end
   end
@@ -38,7 +39,7 @@ describe Categories::CreateWithGroup do
   context 'when there is no category group with given group name' do
     it 'creates a new category group' do
       expect do
-        described_class.call(params) 
+        described_class.call(params)
       end.to change { CategoryGroup.count }.by(1)
     end
   end
@@ -50,7 +51,7 @@ describe Categories::CreateWithGroup do
       )
       create(:category, name: params[:name], category_group: category_group)
 
-      expect do  
+      expect do
         described_class(params)
       end.to raise_error { Categories::DuplicateError.new }
     end

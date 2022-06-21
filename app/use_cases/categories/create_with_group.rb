@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Categories
   class CreateWithGroup < ApplicationUseCase
     def initialize(params)
@@ -10,7 +12,8 @@ module Categories
 
         Category.create!(
           name: params[:name],
-          category_group: category_group
+          is_recurring: params[:is_recurring],
+          category_group: category_group,
         )
       end
     end
@@ -27,7 +30,7 @@ module Categories
     def category_group
       @category_group ||= CategoryGroup.find_or_create_by!(
         budget_id: params[:budget_id],
-        name: params[:group_name]
+        name: params[:group_name],
       )
     end
   end
