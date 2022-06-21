@@ -3,6 +3,7 @@
 FactoryBot.define do
   factory :category do
     category_group
+    is_recurring { [true, false].sample }
     name { Faker::Creature::Dog.name }
 
     trait :with_budget do

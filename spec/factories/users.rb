@@ -6,6 +6,5 @@ FactoryBot.define do
     sequence(:auth_provider_id) { |i| "token_#{i}" }
 
     name { 'John' }
-    password { 'my@pass123' }
   end
 end

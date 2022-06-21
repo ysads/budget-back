@@ -14,7 +14,8 @@ describe Api::CategorySerializer do
         type: :category,
         attributes: {
           name: category.name,
-          category_group_id: category.category_group_id,
+          is_recurring: category.is_recurring,
+          group_name: category.category_group.name,
         },
       },
     )

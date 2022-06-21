@@ -12,6 +12,10 @@ module Authorizable
     head :unauthorized
   end
 
+  def current_user
+    @current_user
+  end
+
   def auth_token
     request.headers['Authorization']&.split(' ')&.last || ''
   end

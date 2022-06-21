@@ -3,7 +3,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '>= 2.7.1'
 
-gem 'devise'
 gem 'fast_jsonapi', git: 'https://github.com/fast-jsonapi/fast_jsonapi'
 gem 'jwt'
 gem 'oj'
@@ -11,6 +10,7 @@ gem 'pg'
 gem 'puma'
 gem 'rack-cors'
 gem 'rails'
+gem 'responders'
 gem 'bootsnap'
 gem 'tzinfo-data'
 

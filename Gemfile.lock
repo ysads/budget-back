@@ -69,19 +69,12 @@ GEM
       zeitwerk (~> 2.3)
     amazing_print (1.4.0)
     ast (2.4.2)
-    bcrypt (3.1.16)
     bootsnap (1.12.0)
       msgpack (~> 1.2)
     builder (3.2.4)
     byebug (11.1.3)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
-    devise (4.8.1)
-      bcrypt (~> 3.0)
-      orm_adapter (~> 0.1)
-      railties (>= 4.1.0)
-      responders
-      warden (~> 1.2.3)
     diff-lcs (1.5.0)
     erubi (1.10.0)
     factory_bot (6.2.0)
@@ -116,7 +109,6 @@ GEM
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     oj (3.13.14)
-    orm_adapter (0.5.0)
     parallel (1.22.1)
     parser (3.1.2.0)
       ast (~> 2.4.1)
@@ -214,8 +206,6 @@ GEM
     tzinfo-data (1.2022.1)
       tzinfo (>= 1.0.0)
     unicode-display_width (2.1.0)
-    warden (1.2.9)
-      rack (>= 2.0.9)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -228,7 +218,6 @@ DEPENDENCIES
   amazing_print
   bootsnap
   byebug
-  devise
   factory_bot_rails
   faker
   fast_jsonapi!
@@ -239,6 +228,7 @@ DEPENDENCIES
   puma
   rack-cors
   rails
+  responders
   rspec-rails
   rubocop
   shoulda-matchers
