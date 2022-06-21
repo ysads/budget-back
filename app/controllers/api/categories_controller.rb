@@ -7,7 +7,7 @@ module Api
 
     # POST /api/budgets/:budget_id/categories
     def create
-      category = Category.create!(create_params)
+      category = Categories::CreateWithGroup.call(create_params)
 
       render json: Api::CategorySerializer.new(category)
     end
@@ -20,7 +20,7 @@ module Api
     private
 
     def create_params
-      params.permit(:category_group_id, :name)
+      params.permit(:budget_id, :group_name, :name)
     end
 
     def available_categories

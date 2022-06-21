@@ -14,7 +14,7 @@ describe Api::CategorySerializer do
         type: :category,
         attributes: {
           name: category.name,
-          category_group_id: category.category_group_id,
+          group_name: category.category_group.name,
         },
       },
     )

@@ -4,6 +4,7 @@ require 'rails_helper'
 
 describe Api::CategoryGroupsController do
   let(:budget) { create(:budget) }
+  let(:category_group) { create(:category_group, budget: budget) }
   let(:headers) do
     {
       Accept: 'application/json',
@@ -15,7 +16,7 @@ describe Api::CategoryGroupsController do
     let(:params) do
       {
         budget_id: budget.id,
-        category_group_id: create(:category_group).id,
+        group_name: category_group.name,
         name: Faker::Commerce.department,
       }
     end
@@ -54,7 +55,7 @@ describe Api::CategoryGroupsController do
       end.to change { Category.count }.by(1)
 
       expect(Category.last).to have_attributes(
-        category_group_id: params[:category_group_id],
+        category_group_id: category_group.id,
         name: params[:name],
       )
     end

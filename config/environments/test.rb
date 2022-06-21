@@ -44,6 +44,9 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
+  # That's the host rspec uses to test requests
+  config.hosts << "www.example.com"
+
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
 end
