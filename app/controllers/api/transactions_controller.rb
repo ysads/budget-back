@@ -26,6 +26,13 @@ module Api
       render json: serialize(transaction)
     end
 
+    # DELETE /api/budgets/:budget_id/transactions/:id
+    def destroy
+      Transactions::Delete.call(id: params[:id])
+
+      head :ok
+    end
+
     private
 
     def serialize(records)
