@@ -11,10 +11,11 @@ Rails.application.routes.draw do
       resources :months, only: %i[show], param: :iso_month
       resources :monthly_budgets, only: %i[create index update]
       resources :payees, only: %i[index]
-      resources :transactions, only: %i[create index update]
+      resources :transactions, only: %i[create destroy index update]
       resources :transfers, only: %i[create] do
         collection do
           put :update
+          delete :destroy
         end
       end
     end

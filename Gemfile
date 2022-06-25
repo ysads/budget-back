@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '>= 2.7.1'
 
+gem 'dotenv-rails'
 gem 'fast_jsonapi', git: 'https://github.com/fast-jsonapi/fast_jsonapi'
 gem 'jwt'
 gem 'oj'

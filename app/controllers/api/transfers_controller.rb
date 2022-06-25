@@ -7,16 +7,23 @@ module Api
 
     # POST /api/budgets/:budget_id/transfers
     def create
-      transactions = Transactions::CreateTransfer.call(create_params)
+      transactions = Transfers::Create.call(create_params)
 
       render json: serialize(transactions)
     end
 
     # PUT /api/budgets/:budget_id/transfers
     def update
-      transactions = Transactions::UpdateTransfer.call(update_params)
+      transactions = Transactions::Update.call(update_params)
 
       render json: serialize(transactions)
+    end
+
+    # DELETE /api/budgets/:budget_id/transfers
+    def destroy
+      Transactions::Delete.call(destroy_params)
+
+      head :ok
     end
 
     private
@@ -38,6 +45,10 @@ module Api
       create_params.merge(
         params.permit(:destination_transaction_id, :origin_transaction_id),
       )
+    end
+
+    def destroy_params
+      params.permit(:destination_transaction_id, :origin_transaction_id)
     end
   end
 end
