@@ -7,21 +7,21 @@ module Api
 
     # POST /api/budgets/:budget_id/transfers
     def create
-      transactions = Transfers::Create.call(create_params)
+      transactions = Transactions::CreateTransfer.call(create_params)
 
       render json: serialize(transactions)
     end
 
     # PUT /api/budgets/:budget_id/transfers
     def update
-      transactions = Transactions::Update.call(update_params)
+      transactions = Transactions::UpdateTransfer.call(update_params)
 
       render json: serialize(transactions)
     end
 
     # DELETE /api/budgets/:budget_id/transfers
     def destroy
-      Transactions::Delete.call(destroy_params)
+      Transactions::DeleteTransfer.call(destroy_params)
 
       head :ok
     end
