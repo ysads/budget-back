@@ -19,6 +19,6 @@ class TransactionsQuery < ApplicationQuery
   end
 
   def sort
-    @relation = relation.order(created_at: :desc)
+    @relation = relation.order(reference_at: :desc, created_at: :desc)
   end
 end
